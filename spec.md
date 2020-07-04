@@ -33,7 +33,7 @@
 * Roluri (neexcluzive mutual, se preiau la crearea contului sau ulterior):
     1. ofertant de obiect
     2. licitant
-\
+
 * Cerinte:
     1. Unit testing folosind NUnit, xUnit sau Visual Studio 2017+; minim 210 de metode de testare (__conditie de luare in considerare a temei__); se vor testa daca valorile proprietatilor au valori adecvate, restrictiile de mai sus si altele de validare a corectitudinii rezultatelor sia fluxului de lucru.
     &nbsp;
