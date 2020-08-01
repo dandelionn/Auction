@@ -29,7 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterfaces", "UserInter
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{88D73BF7-0677-44C4-ACF0-E360593367CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "LibraryApplication\Application.csproj", "{DB8E6862-0F9D-4D3C-A3CA-25CEBE103D98}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{DB8E6862-0F9D-4D3C-A3CA-25CEBE103D98}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Log", "Log", "{77AED068-6692-4E11-83C4-9C0E71E26831}"
 EndProject
