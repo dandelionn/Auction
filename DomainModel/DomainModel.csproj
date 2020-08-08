@@ -37,6 +37,7 @@
       <HintPath>..\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,10 +53,12 @@
     <Compile Include="User.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validators\BeginPriceValidator.cs" />
+    <Compile Include="Validators\CurrencyNameValidator.cs" />
     <Compile Include="Validators\LessOrEqualToBookCount.cs" />
     <Compile Include="Validators\RequiredPhoneNumberOrEmail.cs" />
-    <Compile Include="Validators\ReturnDateValidator.cs" />
-    <Compile Include="Validators\ActualReturnDateValidator.cs" />
+    <Compile Include="Validators\EndDateValidator.cs" />
+    <Compile Include="Validators\BeginDateValidator.cs" />
     <Compile Include="Helpers\ErrorMessages.cs" />
     <Compile Include="Validators\MustHaveOneElementAttribute.cs" />
   </ItemGroup>

@@ -79,7 +79,7 @@ namespace DomainModel.Validators
         /// <summary>
         /// Defines the PriceRequired.
         /// </summary>
-        public const string PriceRequired = "Price is required";
+        public const string BeginPriceRequired = "Price is required";
 
         /// <summary>
         /// Defines the UsersRequired.
@@ -295,5 +295,50 @@ namespace DomainModel.Validators
         /// Defines the AuctionsRequired.
         /// </summary>
         public const string AuctionsRequired = "Auctions is required";
+
+        /// <summary>
+        /// Defines the BeginDateRequired.
+        /// </summary>
+        public const string BeginDateRequired = "BeginDate is required";
+
+        /// <summary>
+        /// Defines the EndDateRequired.
+        /// </summary>
+        public const string EndDateRequired = "EndDate is required";
+
+        /// <summary>
+        /// Defines the BeginDateIsAfterEndDate.
+        /// </summary>
+        public const string BeginDateIsAfterEndDate = "BeginDate is after EndDate";
+
+        /// <summary>
+        /// Defines the EndDateIsBeforeBeginDate.
+        /// </summary>
+        public const string EndDateIsBeforeBeginDate = "EndDate is before BeginDate";
+
+        /// <summary>
+        /// Defines the AuctionPeriodIsTooLarge.
+        /// </summary>
+        public const string AuctionPeriodIsTooLarge = "Auction period is too large";
+
+        /// <summary>
+        /// Defines the BeginDateShouldNotBeInThePast.
+        /// </summary>
+        public const string BeginDateShouldNotBeInThePast = "BeginDate should not be in the past";
+
+        /// <summary>
+        /// Defines the CurrencyTypeRequired.
+        /// </summary>
+        public const string CurrencyNameRequired = "CurrencyType is required";
+
+        public const string CurrencyNameIsNotValid = "Currency name is not valid";
+
+        public const string TooSmallAuctionBeginPrice = "The auction begin price is too small";
+
+        public const string CurrentPriceRequired = "CurrentPrice is required";
+
+        public const string OwnedAuctionsRequired = "OwnedAuctions is required";
+
+        public const string OwnerRequired = "Owner is required";
     }
 }

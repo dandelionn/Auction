@@ -21,6 +21,7 @@ namespace DomainModel
         {
             this.Products = new List<Product>();
             this.Bids = new List<Bid>();
+            this.OwnedAuctions = new List<Auction>();
         }
 
         /// <summary>
@@ -73,6 +74,9 @@ namespace DomainModel
         /// </summary>
         [Required(ErrorMessage = ErrorMessages.BidsRequired)]
         public List<Bid> Bids { get; set; }
+
+        [Required(ErrorMessage = ErrorMessages.OwnedAuctionsRequired)]
+        public List<Auction> OwnedAuctions { get; set; }
 
         /// <summary>
         /// The Validate.

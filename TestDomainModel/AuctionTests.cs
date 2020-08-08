@@ -3,13 +3,16 @@
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
 namespace TestDomainModel
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using DomainModel;
     using DomainModel.Validators;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Configuration;
 
     /// <summary>
     /// Defines the <see cref="AuctionTests" />.
@@ -168,49 +171,62 @@ namespace TestDomainModel
         }
 
         /// <summary>
-        /// The TestMethodValidPrice.
+        /// The TestMethodValidBeginPrice.
         /// </summary>
         [TestMethod]
-        public void TestMethodValidPrice()
+        public void TestMethodValidBeginPrice()
         {
-            auction.Price = 25.6;
-            context.MemberName = "Price";
+            auction.BeginPrice = (decimal)25.6;
+            context.MemberName = "BeginPrice";
 
-            var result = Validator.TryValidateProperty(auction.Price, context, results);
+            var result = Validator.TryValidateProperty(auction.BeginPrice, context, results);
 
             Assert.AreEqual(0, results.Count);
         }
 
         /// <summary>
-        /// The TestMethodNegativePrice.
+        /// The TestMethodNegativeBeginPrice.
         /// </summary>
         [TestMethod]
-        public void TestMethodNegativePrice()
+        public void TestMethodNegativeBeginPrice()
         {
-            auction.Price = -25.6;
-            context.MemberName = "Price";
+            auction.BeginPrice = (decimal)-25.6;
+            context.MemberName = "BeginPrice";
 
-            var result = Validator.TryValidateProperty(auction.Price, context, results);
+            var result = Validator.TryValidateProperty(auction.BeginPrice, context, results);
 
             Assert.AreEqual(1, results.Count);
             var res = results[0];
             Assert.AreEqual(ErrorMessages.NegativePrice, res.ErrorMessage);
         }
 
-        /// <summary>
-        /// The TestMethodNullPrice.
-        /// </summary>
         [TestMethod]
-        public void TestMethodNullPrice()
+        public void TestMethodTooSmallAuctionBeginPrice()
         {
-            auction.Price = null;
-            context.MemberName = "Price";
+            auction.BeginPrice = decimal.Parse(ConfigurationManager.AppSettings.Get("MinAuctionBeginPrice")) / 2;
+            context.MemberName = "BeginPrice";
 
-            var result = Validator.TryValidateProperty(auction.Price, context, results);
+            var result = Validator.TryValidateProperty(auction.BeginPrice, context, results);
 
             Assert.AreEqual(1, results.Count);
             var res = results[0];
-            Assert.AreEqual(ErrorMessages.PriceRequired, res.ErrorMessage);
+            Assert.AreEqual(ErrorMessages.TooSmallAuctionBeginPrice, res.ErrorMessage);
+        }
+
+        /// <summary>
+        /// The TestMethodNullBeginPrice.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodNullBeginPrice()
+        {
+            auction.BeginPrice = null;
+            context.MemberName = "BeginPrice";
+
+            var result = Validator.TryValidateProperty(auction.BeginPrice, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.BeginPriceRequired, res.ErrorMessage);
         }
 
         /// <summary>
@@ -272,5 +288,187 @@ namespace TestDomainModel
             var res = results[0];
             Assert.AreEqual(ErrorMessages.BidsRequired, res.ErrorMessage);
         }
+
+        /// <summary>
+        /// The TestMethodBeginDateNull.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodBeginDateNull()
+        {
+            auction.BeginDate = null;
+            context.MemberName = "BeginDate";
+
+            var result = Validator.TryValidateProperty(auction.BeginDate, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.BeginDateRequired, res.ErrorMessage);
+        }
+
+        /// <summary>
+        /// The TestMethodBeginDateAfterEndDate.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodBeginDateAfterEndDate()
+        {
+            auction.BeginDate = DateTime.Now.AddDays(1);
+            auction.EndDate = DateTime.Now;
+            context.MemberName = "BeginDate";
+
+            var result = Validator.TryValidateProperty(auction.BeginDate, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.BeginDateIsAfterEndDate, res.ErrorMessage);
+        }
+
+        /// <summary>
+        /// The TestMethodBeginDateInThePast.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodBeginDateInThePast()
+        {
+            auction.BeginDate = new DateTime(2000, 1, 1);
+            auction.EndDate = DateTime.Now;
+            context.MemberName = "BeginDate";
+
+            var result = Validator.TryValidateProperty(auction.BeginDate, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.BeginDateShouldNotBeInThePast, res.ErrorMessage);
+        }
+
+        /// <summary>
+        /// The TestMethodValidBeginDate.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodValidBeginDate()
+        {
+            auction.BeginDate = DateTime.Now;
+            auction.EndDate = DateTime.Now.AddDays(1);
+            context.MemberName = "BeginDate";
+
+            var result = Validator.TryValidateProperty(auction.BeginDate, context, results);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        /// <summary>
+        /// The TestMethodEndDateNull.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodEndDateNull()
+        {
+            auction.EndDate = null;
+            context.MemberName = "EndDate";
+
+            var result = Validator.TryValidateProperty(auction.EndDate, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.EndDateRequired, res.ErrorMessage);
+        }
+
+        /// <summary>
+        /// The TestMethodEndDateBeforeBeginDate.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodEndDateBeforeBeginDate()
+        {
+            auction.BeginDate = DateTime.Now.AddDays(1);
+            auction.EndDate = DateTime.Now;
+            context.MemberName = "EndDate";
+
+            var result = Validator.TryValidateProperty(auction.EndDate, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.EndDateIsBeforeBeginDate, res.ErrorMessage);
+        }
+
+        /// <summary>
+        /// The TestMethodAuctionPeriodTooLarge.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodAuctionPeriodTooLarge()
+        {
+            auction.BeginDate = DateTime.Now;
+            auction.EndDate = DateTime.Now.AddMonths(5);
+            context.MemberName = "EndDate";
+
+            var result = Validator.TryValidateProperty(auction.EndDate, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.AuctionPeriodIsTooLarge, res.ErrorMessage);
+        }
+
+        /// <summary>
+        /// The TestMethodValidEndDate.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodValidEndDate()
+        {
+            auction.BeginDate = DateTime.Now;
+            auction.EndDate = DateTime.Now.AddMonths(4);
+            context.MemberName = "EndDate";
+
+            var result = Validator.TryValidateProperty(auction.EndDate, context, results);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+
+        [TestMethod]
+        public void TestMethodNullCurrencyName()
+        {
+            auction.CurrencyName = null;
+            context.MemberName = "CurrencyName";
+
+            var result = Validator.TryValidateProperty(auction.CurrencyName, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.CurrencyNameRequired, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void TestMethodValidCurrencyName()
+        {
+            auction.CurrencyName = CurrencyNameValidator.GetCurrenciesEnglishNames()[0];
+            context.MemberName = "CurrencyName";
+
+            var result = Validator.TryValidateProperty(auction.CurrencyName, context, results);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        [TestMethod]
+        public void TestMethodInvalidCurrencyName()
+        {
+            auction.CurrencyName = "InvalidCurrencyName";
+            context.MemberName = "CurrencyName";
+
+            var result = Validator.TryValidateProperty(auction.CurrencyName, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.CurrencyNameIsNotValid, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void TestMethodNullOwner()
+        {
+            auction.Owner = null;
+            context.MemberName = "Owner";
+
+            var result = Validator.TryValidateProperty(auction.Owner, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.OwnerRequired, res.ErrorMessage);
+        }
+
     }
 }

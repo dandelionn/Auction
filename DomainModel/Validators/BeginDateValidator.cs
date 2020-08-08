@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ReturnDateValidator.cs" company="Transilvania University of Brasov">    
+// <copyright file="BeginDateValidator.cs" company="Transilvania University of Brasov">
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -9,10 +9,10 @@ namespace DomainModel.Validators
     using System.ComponentModel.DataAnnotations;
 
     /// <summary>
-    /// Defines the .<see cref="ReturnDateValidator" />
+    /// Defines the .<see cref="BeginDateValidator" />
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    public sealed class ReturnDateValidator : ValidationAttribute
+    public sealed class BeginDateValidator : ValidationAttribute
     {
         /// <summary>
         /// The IsValid.
@@ -22,13 +22,16 @@ namespace DomainModel.Validators
         /// <returns>The .<see cref="ValidationResult"/></returns>
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var loanDate = (DateTime)validationContext.ObjectType.GetProperty("LoanDate").GetValue(validationContext.ObjectInstance, null);
-
-            var returnDate = (DateTime)validationContext.ObjectType.GetProperty("ReturnDate").GetValue(validationContext.ObjectInstance, null);
-
-            if (returnDate < loanDate)
+            var beginDate = (DateTime)validationContext.ObjectType.GetProperty("BeginDate").GetValue(validationContext.ObjectInstance, null);
+            var endDate = (DateTime)validationContext.ObjectType.GetProperty("EndDate").GetValue(validationContext.ObjectInstance, null);
+            if (beginDate < DateTime.Now)
             {
-                return new ValidationResult(ErrorMessages.ReturnDateLaterOrEqualLoanDate);
+                return new ValidationResult(ErrorMessages.BeginDateShouldNotBeInThePast);
+            }
+
+            if (beginDate > endDate)
+            {
+                return new ValidationResult(ErrorMessages.BeginDateIsAfterEndDate);
             }
 
             return ValidationResult.Success;

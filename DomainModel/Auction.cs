@@ -3,11 +3,13 @@
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
 namespace DomainModel
 {
+    using DomainModel.Validators;
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using DomainModel.Validators;
 
     /// <summary>
     /// Defines the <see cref="Auction" />.
@@ -43,11 +45,21 @@ namespace DomainModel
         public string Address { get; set; }
 
         /// <summary>
-        /// Gets or sets the Price.
+        /// Gets or sets the CurrencyName.
         /// </summary>
-        [Required(ErrorMessage = ErrorMessages.PriceRequired)]
-        [Range(.0, double.MaxValue, ErrorMessage = ErrorMessages.NegativePrice)]
-        public double? Price { get; set; }
+        [Required(ErrorMessage = ErrorMessages.CurrencyNameRequired)]
+        [CurrencyNameValidator]
+        public string CurrencyName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the BeginPrice.
+        /// </summary>
+        [Required(ErrorMessage = ErrorMessages.BeginPriceRequired)]
+        [BeginPriceValidator]
+        public decimal? BeginPrice { get; set; }
+
+        [Required(ErrorMessage = ErrorMessages.CurrentPriceRequired)]
+        public decimal? CurrentPrice { get; set; }
 
         /// <summary>
         /// Gets or sets the Products.
@@ -63,6 +75,28 @@ namespace DomainModel
         public List<Bid> Bids { get; set; }
 
         /// <summary>
+        /// Gets or sets the BeginDate.
+        /// </summary>
+        [Required(ErrorMessage = ErrorMessages.BeginDateRequired)]
+        [DataType(DataType.Date, ErrorMessage = ErrorMessages.DateNotValid)]
+        [BeginDateValidator]
+        public DateTime? BeginDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the EndDate.
+        /// </summary>
+        [Required(ErrorMessage = ErrorMessages.EndDateRequired)]
+        [DataType(DataType.Date, ErrorMessage = ErrorMessages.DateNotValid)]
+        [EndDateValidator]
+        public DateTime? EndDate { get; set; }
+
+        [Required(ErrorMessage = ErrorMessages.OwnerRequired)]
+        public User Owner { get; set; }
+
+
+        public bool Status { get; set; }
+
+        /// <summary>
         /// The Validate.
         /// </summary>
         /// <param name="validationContext">The validationContext<see cref="ValidationContext"/>.</param>
@@ -72,7 +106,7 @@ namespace DomainModel
             var results = new List<ValidationResult>();
             Validator.TryValidateProperty(this.Name, new ValidationContext(this, null, null) { MemberName = nameof(Name) }, results);
             Validator.TryValidateProperty(this.Address, new ValidationContext(this, null, null) { MemberName = nameof(Address) }, results);
-            Validator.TryValidateProperty(this.Price, new ValidationContext(this, null, null) { MemberName = nameof(Price) }, results);
+            Validator.TryValidateProperty(this.BeginPrice, new ValidationContext(this, null, null) { MemberName = nameof(BeginPrice) }, results);
             Validator.TryValidateProperty(this.Products, new ValidationContext(this, null, null) { MemberName = nameof(Products) }, results);
             Validator.TryValidateProperty(this.Bids, new ValidationContext(this, null, null) { MemberName = nameof(Bids) }, results);
             return results;

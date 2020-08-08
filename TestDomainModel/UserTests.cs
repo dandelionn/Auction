@@ -333,5 +333,18 @@ namespace TestDomainModel
             var res = results[0];
             Assert.AreEqual(ErrorMessages.BidsRequired, res.ErrorMessage);
         }
+
+        [TestMethod]
+        public void TestMethodOwnedAuctionsNull()
+        {
+            user.OwnedAuctions = null;
+            context.MemberName = "OwnedAuctions";
+
+            var result = Validator.TryValidateProperty(user.OwnedAuctions, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.OwnedAuctionsRequired, res.ErrorMessage);
+        }
     }
 }
