@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="BeginPriceValidator.cs" company="Transilvania University of Brasov">
+// <copyright file="PriceValidator.cs" company="Transilvania University of Brasov">
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -10,7 +10,7 @@ namespace DomainModel.Validators
     using System.Configuration;
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    public sealed class BeginPriceValidator : ValidationAttribute
+    public sealed class PriceValidator : ValidationAttribute
     {
         // Just a fake conversion function, there is no point in implementing a real one.
         public static decimal ConvertCurrency(string fromCurrencyName, string toCurrencyName, decimal value)
@@ -27,16 +27,16 @@ namespace DomainModel.Validators
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var beginPrice = (decimal) validationContext.ObjectType.GetProperty("BeginPrice").GetValue(validationContext.ObjectInstance, null);
+            var price = (decimal) value;
             var currencyName = (string) validationContext.ObjectType.GetProperty("CurrencyName").GetValue(validationContext.ObjectInstance, null);
-            if (beginPrice < 0)
+            if (price < 0)
             {
                 return new ValidationResult(ErrorMessages.NegativePrice);
             }
 
-            if (beginPrice < GetMinAuctionBeginPrice(currencyName))
+            if (price < GetMinAuctionBeginPrice(currencyName))
             {
-                return new ValidationResult(ErrorMessages.TooSmallAuctionBeginPrice);
+                return new ValidationResult(ErrorMessages.AuctionPriceTooSmall);
             }
 
             return ValidationResult.Success;

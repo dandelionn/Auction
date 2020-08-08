@@ -17,15 +17,15 @@ namespace DomainModel
 
         public int Id { get; set; }
 
-        [Required(ErrorMessage = ErrorMessages.UserRequired)]
+        [Required(ErrorMessage = ErrorMessages.BidderRequired)]
         public Bidder Bidder { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.AuctionRequired)]
         public Auction Auction { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.ValueRequired)]
-        [Range(.0, double.MaxValue, ErrorMessage = ErrorMessages.NegativeValue)]
-        public double? Value { get; set; }
+        [Range(0, double.MaxValue, ErrorMessage = ErrorMessages.NegativeValue)]
+        public decimal? Value { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

@@ -17,24 +17,12 @@ namespace TestDomainModel
     [TestClass]
     public class ProductTests
     {
-        /// <summary>
-        /// Defines the product.
-        /// </summary>
         private Product product;
 
-        /// <summary>
-        /// Defines the context.
-        /// </summary>
         private ValidationContext context;
 
-        /// <summary>
-        /// Defines the results.
-        /// </summary>
         private List<ValidationResult> results;
 
-        /// <summary>
-        /// The TestInit.
-        /// </summary>
         [TestInitialize]
         public void TestInit()
         {
@@ -43,60 +31,11 @@ namespace TestDomainModel
             results = new List<ValidationResult>();
         }
 
-        /// <summary>
-        /// The TestMethodValidName.
-        /// </summary>
-        [TestMethod]
-        public void TestMethodValidName()
-        {
-            product.Name = "RandomName";
-            context.MemberName = "Name";
-
-            var result = Validator.TryValidateProperty(product.Name, context, results);
-
-            Assert.AreEqual(0, results.Count);
-        }
-
-        /// <summary>
-        /// The TestMethodNameTooLong.
-        /// </summary>
-        [TestMethod]
-        public void TestMethodNameTooLong()
-        {
-            product.Name = new string('a', 51);
-            context.MemberName = "Name";
-
-            var result = Validator.TryValidateProperty(product.Name, context, results);
-
-            Assert.AreEqual(1, results.Count);
-            var res = results[0];
-            Assert.AreEqual(ErrorMessages.LengthBetween2And50, res.ErrorMessage);
-        }
-
-        /// <summary>
-        /// The TestMethodNameTooShort.
-        /// </summary>
-        [TestMethod]
-        public void TestMethodNameTooShort()
-        {
-            product.Name = new string('a', 1);
-            context.MemberName = "Name";
-
-            var result = Validator.TryValidateProperty(product.Name, context, results);
-
-            Assert.AreEqual(1, results.Count);
-            var res = results[0];
-            Assert.AreEqual(ErrorMessages.LengthBetween2And50, res.ErrorMessage);
-        }
-
-        /// <summary>
-        /// The TestNullName.
-        /// </summary>
         [TestMethod]
         public void TestMethodNullName()
         {
             product.Name = null;
-            context.MemberName = "Name";
+            context.MemberName = nameof(Product.Name);
 
             var result = Validator.TryValidateProperty(product.Name, context, results);
 
@@ -105,44 +44,48 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.NameRequired, res.ErrorMessage);
         }
 
-        /// <summary>
-        /// The TestMethodAuctionsNull.
-        /// </summary>
         [TestMethod]
-        public void TestMethodAuctionsNull()
+        public void TestMethodValidName()
         {
-            product.Auctions = null;
-            context.MemberName = "Auctions";
+            product.Name = "RandomName";
+            context.MemberName = nameof(Product.Name);
 
-            var result = Validator.TryValidateProperty(product.Auctions, context, results);
+            var result = Validator.TryValidateProperty(product.Name, context, results);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        [TestMethod]
+        public void TestMethodNameTooLong()
+        {
+            product.Name = new string('a', 51);
+            context.MemberName = nameof(Product.Name);
+
+            var result = Validator.TryValidateProperty(product.Name, context, results);
 
             Assert.AreEqual(1, results.Count);
             var res = results[0];
-            Assert.AreEqual(ErrorMessages.AuctionsRequired, res.ErrorMessage);
+            Assert.AreEqual(ErrorMessages.LengthBetween2And50, res.ErrorMessage);
         }
 
-        /// <summary>
-        /// The TestMethodCategoriesListNotEmpty.
-        /// </summary>
         [TestMethod]
-        public void TestMethodCategoriesListNotEmpty()
+        public void TestMethodNameTooShort()
         {
-            product.Categories.Add(new Category());
-            context.MemberName = "Categories";
+            product.Name = new string('a', 1);
+            context.MemberName = nameof(Product.Name);
 
-            var result = Validator.TryValidateProperty(product.Categories, context, results);
+            var result = Validator.TryValidateProperty(product.Name, context, results);
 
-            Assert.AreEqual(0, results.Count); // ErrorMessage.LenghtNotValid
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.LengthBetween2And50, res.ErrorMessage);
         }
 
-        /// <summary>
-        /// The TestMethodCategoriesNull.
-        /// </summary>
         [TestMethod]
         public void TestMethodCategoriesNull()
         {
             product.Categories = null;
-            context.MemberName = "Categories";
+            context.MemberName = nameof(Product.Categories);
 
             var result = Validator.TryValidateProperty(product.Categories, context, results);
 
@@ -151,34 +94,71 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.CategoriesRequired, res.ErrorMessage);
         }
 
-        /// <summary>
-        /// The TestMethodUsersListNotEmpty.
-        /// </summary>
         [TestMethod]
-        public void TestMethodUsersListNotEmpty()
+        public void TestMethodCategoriesListEmpty()
         {
-            product.Users.Add(new Person());
-            context.MemberName = "Users";
+            product.Categories = new List<Category>();
+            context.MemberName = nameof(Product.Categories);
 
-            var result = Validator.TryValidateProperty(product.Users, context, results);
-
-            Assert.AreEqual(0, results.Count); // ErrorMessage.LenghtNotValid
-        }
-
-        /// <summary>
-        /// The TestMethodUsersNull.
-        /// </summary>
-        [TestMethod]
-        public void TestMethodUsersNull()
-        {
-            product.Users = null;
-            context.MemberName = "Users";
-
-            var result = Validator.TryValidateProperty(product.Users, context, results);
+            var result = Validator.TryValidateProperty(product.Categories, context, results);
 
             Assert.AreEqual(1, results.Count);
             var res = results[0];
-            Assert.AreEqual(ErrorMessages.UsersRequired, res.ErrorMessage);
+            Assert.AreEqual(ErrorMessages.LengthMustBeGreaterThanZero, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void TestMethodCategoriesValid()
+        {
+            product.Categories.Add(new Category());
+            context.MemberName = nameof(Product.Categories);
+
+            var result = Validator.TryValidateProperty(product.Categories, context, results);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        [TestMethod]
+        public void TestMethodSellersNull()
+        {
+            product.Sellers = null;
+            context.MemberName = nameof(Product.Sellers);
+
+            var result = Validator.TryValidateProperty(product.Sellers, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.SellersRequired, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void TestMethodSellersListEmpty()
+        {
+            product.Sellers = new List<Seller>();
+            context.MemberName = nameof(Product.Sellers);
+
+            var result = Validator.TryValidateProperty(product.Sellers, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.LengthMustBeGreaterThanZero, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void TestMethodSellersValid()
+        {
+            product.Sellers.Add(new Seller());
+            context.MemberName = nameof(Product.Sellers);
+
+            var result = Validator.TryValidateProperty(product.Sellers, context, results);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        [TestMethod]
+        public void TestMethodAuctionsNotNull()
+        {
+            Assert.IsNotNull(product.Auctions);
         }
     }
 }

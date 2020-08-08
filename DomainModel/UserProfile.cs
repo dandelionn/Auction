@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace DomainModel
 {
+    using DomainModel.Validators;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,10 +14,15 @@ namespace DomainModel
         [ForeignKey(nameof(Person))]
         public int Id { get; set; }
 
-        [Required]
+        //https://stackoverflow.com/questions/12018245/regular-expression-to-validate-username
+        [Required(ErrorMessage = ErrorMessages.UsernameRequired)]
         public string Username { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ErrorMessages.PasswordRequired)]
         public string Password { get; set; }
+
+        [Required(ErrorMessage = ErrorMessages.EmailRequired)]
+        [EmailAddress(ErrorMessage = ErrorMessages.InvalidEmailAddress)]
+        public string Email { get; set; }
     }
 }

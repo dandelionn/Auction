@@ -124,7 +124,7 @@ namespace DomainModel.Validators
         /// <summary>
         /// Defines the LengthGreaterThanZero.
         /// </summary>
-        public const string LengthGreaterThanZero = "The length must be greater than 0";
+        public const string LengthMustBeGreaterThanZero = "The length must be greater than 0";
 
         /// <summary>
         /// Defines the BookRequired.
@@ -144,7 +144,7 @@ namespace DomainModel.Validators
         /// <summary>
         /// Defines the DateNotValid.
         /// </summary>
-        public const string DateNotValid = "Date is not valid";
+        public const string InvalidDate = "Date is not valid";
 
         /// <summary>
         /// Defines the ReturnDateRequired.
@@ -164,7 +164,7 @@ namespace DomainModel.Validators
         /// <summary>
         /// Defines the NotAValidPhoneNumber.
         /// </summary>
-        public const string NotAValidPhoneNumber = "Not a valid phone number";
+        public const string InvalidPhoneNumber = "Not a valid phone number";
 
         /// <summary>
         /// Defines the LengthBetween2And100.
@@ -174,7 +174,7 @@ namespace DomainModel.Validators
         /// <summary>
         /// Defines the NotAValidEmailAddress.
         /// </summary>
-        public const string NotAValidEmailAddress = "Not a valid email address";
+        public const string InvalidEmailAddress = "Not a valid email address";
 
         /// <summary>
         /// Defines the NormalOrPersonnelReader.
@@ -339,6 +339,20 @@ namespace DomainModel.Validators
 
         public const string OwnedAuctionsRequired = "OwnedAuctions is required";
 
-        public const string OwnerRequired = "Owner is required";
+        public const string SellerRequired = "Seller is required";
+
+        public const string BidderRequired = "Bidder is required";
+
+        public const string SellersRequired = "Sellers is required";
+
+        public const string AuctionPriceTooSmall = "Current auction price is to small";
+
+        public const string UsernameRequired = "Username is required";
+
+        public const string PasswordRequired = "Password is required";
+
+        public const string EmailRequired = "Email is required";
+
+        public const string PhoneNumberRequired = "Phone number is required";
     }
 }

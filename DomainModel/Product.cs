@@ -13,9 +13,9 @@ namespace DomainModel
     {
         public Product()
         {
-            this.Auctions = new List<Auction>();
-            this.Categories = new List<Category>();
             this.Sellers = new List<Seller>();
+            this.Categories = new List<Category>();
+            this.Auctions = new List<Auction>();
         }
 
         public int Id { get; set; }
@@ -24,15 +24,15 @@ namespace DomainModel
         [StringLength(50, MinimumLength = 2, ErrorMessage = ErrorMessages.LengthBetween2And50)]
         public string Name { get; set; }
 
-        public List<Auction> Auctions { get; set; }
-
         [Required(ErrorMessage = ErrorMessages.CategoriesRequired)]
-        [MustHaveOneElement(ErrorMessage = ErrorMessages.LengthGreaterThanZero)]
+        [MustHaveOneElement(ErrorMessage = ErrorMessages.LengthMustBeGreaterThanZero)]
         public List<Category> Categories { get; set; }
 
-        [Required(ErrorMessage = ErrorMessages.UsersRequired)]
-        [MustHaveOneElement(ErrorMessage = ErrorMessages.LengthGreaterThanZero)]
+        [Required(ErrorMessage = ErrorMessages.SellersRequired)]
+        [MustHaveOneElement(ErrorMessage = ErrorMessages.LengthMustBeGreaterThanZero)]
         public List<Seller> Sellers { get; set; }
+
+        public List<Auction> Auctions { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

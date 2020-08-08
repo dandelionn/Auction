@@ -20,9 +20,7 @@ namespace DomainModel
         public int Id { get; set; }
 
         public List<Auction> Auctions { get; set; }
-
         public List<Product> Products { get; set; }
         public virtual Person Person { get; set; }
-
     }
 }

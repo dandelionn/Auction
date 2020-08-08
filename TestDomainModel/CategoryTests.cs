@@ -22,19 +22,10 @@ namespace TestDomainModel
         /// </summary>
         private Category category;
 
-        /// <summary>
-        /// Defines the context.
-        /// </summary>
         private ValidationContext context;
 
-        /// <summary>
-        /// Defines the results.
-        /// </summary>
         private List<ValidationResult> results;
 
-        /// <summary>
-        /// The TestInit.
-        /// </summary>
         [TestInitialize]
         public void TestInit()
         {
@@ -43,28 +34,22 @@ namespace TestDomainModel
             results = new List<ValidationResult>();
         }
 
-        /// <summary>
-        /// The TestMethodValidName.
-        /// </summary>
         [TestMethod]
         public void TestMethodValidName()
         {
             category.Name = "RandomName";
-            context.MemberName = "Name";
+            context.MemberName = nameof(Category.Name);
 
             var result = Validator.TryValidateProperty(category.Name, context, results);
 
             Assert.AreEqual(0, results.Count);
         }
 
-        /// <summary>
-        /// The TestMethodNameTooLong.
-        /// </summary>
         [TestMethod]
         public void TestMethodNameTooLong()
         {
             category.Name = new string('a', 51);
-            context.MemberName = "Name";
+            context.MemberName = nameof(Category.Name);
 
             var result = Validator.TryValidateProperty(category.Name, context, results);
 
@@ -73,14 +58,11 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthBetween2And50, res.ErrorMessage);
         }
 
-        /// <summary>
-        /// The TestMethodNameTooShort.
-        /// </summary>
         [TestMethod]
         public void TestMethodNameTooShort()
         {
             category.Name = new string('a', 1);
-            context.MemberName = "Name";
+            context.MemberName = nameof(Category.Name);
 
             var result = Validator.TryValidateProperty(category.Name, context, results);
 
@@ -89,14 +71,11 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthBetween2And50, res.ErrorMessage);
         }
 
-        /// <summary>
-        /// The TestNullName.
-        /// </summary>
         [TestMethod]
         public void TestMethodNullName()
         {
             category.Name = null;
-            context.MemberName = "Name";
+            context.MemberName = nameof(Category.Name);
 
             var result = Validator.TryValidateProperty(category.Name, context, results);
 
@@ -105,36 +84,16 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.NameRequired, res.ErrorMessage);
         }
 
-        /// <summary>
-        /// The TestMethodProductsNull.
-        /// </summary>
         [TestMethod]
-        public void TestMethodProductsNull()
+        public void TestMethodProductsNotNull()
         {
-            category.Products = null;
-            context.MemberName = "Products";
-
-            var result = Validator.TryValidateProperty(category.Products, context, results);
-
-            Assert.AreEqual(1, results.Count);
-            var res = results[0];
-            Assert.AreEqual(ErrorMessages.ProductsRequired, res.ErrorMessage);
+            Assert.IsNotNull(category.Products);
         }
 
-        /// <summary>
-        /// The TestMethodParentCategoriesNull.
-        /// </summary>
         [TestMethod]
-        public void TestMethodParentCategoriesNull()
+        public void TestMethodParentCategoriesNotNull()
         {
-            category.ParentCategories = null;
-            context.MemberName = "ParentCategories";
-
-            var result = Validator.TryValidateProperty(category.ParentCategories, context, results);
-
-            Assert.AreEqual(1, results.Count);
-            var res = results[0];
-            Assert.AreEqual(ErrorMessages.ParentCategoriesRequired, res.ErrorMessage);
+            Assert.IsNotNull(category.ParentCategories);
         }
     }
 }
