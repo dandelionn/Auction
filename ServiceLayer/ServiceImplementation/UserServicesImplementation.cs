@@ -14,28 +14,28 @@ namespace ServiceLayer.ServiceImplementation
     using DataMapper;
     using DomainModel;
 
-    public class PersonServicesImplementation
+    public class UserServicesImplementation
     {
-        private IUserRepository personRepository;
+        private IUserRepository userRepository;
 
-        public PersonServicesImplementation(IUserRepository personRepository)
+        public UserServicesImplementation(IUserRepository userRepository)
         {
-            this.personRepository = personRepository;
+            this.userRepository = userRepository;
         }
 
         public void Delete(User entity)
         {
-            personRepository.Delete(entity);
+            userRepository.Delete(entity);
         }
 
         public IEnumerable<User> GetAll()
         {
-            return personRepository.Get().OrderBy(person => person.Name).ToList();
+            return userRepository.Get().OrderBy(user => user.Name).ToList();
         }
 
         public User GetByID(object id)
         {
-            return personRepository.GetByID(id);
+            return userRepository.GetByID(id);
         }
 
         public IList<ValidationResult> Insert(User entity)
@@ -43,7 +43,7 @@ namespace ServiceLayer.ServiceImplementation
             var results = EntityValidator.IsEntityValid(entity);
             if (results.Count == 0)
             {
-                personRepository.Insert(entity);
+                userRepository.Insert(entity);
             }
 
             return results;
@@ -53,7 +53,7 @@ namespace ServiceLayer.ServiceImplementation
         {
             var results = EntityValidator.IsEntityValid(entity);
             {
-                personRepository.Update(entity);
+                userRepository.Update(entity);
             }
 
             return results;

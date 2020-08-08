@@ -49,7 +49,7 @@
     <Compile Include="IAuctionService.cs" />
     <Compile Include="IBidService.cs" />
     <Compile Include="ICategoryService.cs" />
-    <Compile Include="IPersonService.cs" />
+    <Compile Include="IUserService.cs" />
     <Compile Include="IProductService.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,7 +57,7 @@
     <Compile Include="ServiceImplementation\BidServicesImplementation.cs" />
     <Compile Include="ServiceImplementation\CategoryServicesImplementation.cs" />
     <Compile Include="Helpers\EntityValidator.cs" />
-    <Compile Include="ServiceImplementation\PersonServicesImplementation.cs" />
+    <Compile Include="ServiceImplementation\UserServicesImplementation.cs" />
     <Compile Include="ServiceImplementation\ProductServicesImplementation.cs" />
   </ItemGroup>
   <ItemGroup>

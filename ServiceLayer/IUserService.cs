@@ -8,9 +8,9 @@ namespace ServiceLayer
     using DomainModel;
 
     /// <summary>
-    /// Defines the <see cref="IPersonService" />.
+    /// Defines the <see cref="IUserService" />.
     /// </summary>
-    interface IPersonService : IService<User>
+    interface IUserService : IService<User>
     {
     }
 }

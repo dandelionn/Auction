@@ -25,7 +25,10 @@ namespace ServiceLayer.ServiceImplementation
             auctionRepository.Delete(entity);
         }
 
-        public IEnumerable<Auction> GetAll() => auctionRepository.Get().OrderBy(auction => auction.Name).ToList();
+        public IEnumerable<Auction> GetAll()
+        {
+            return auctionRepository.Get().OrderBy(auction => auction.Name).ToList();
+        }
 
         public Auction GetByID(object id)
         {
