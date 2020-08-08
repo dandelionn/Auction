@@ -1,16 +1,16 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="UserRepository.cs" company="Transilvania University of Brasov">    
+// <copyright file="IBidderRepository.cs" company="Transilvania University of Brasov">    
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace DataMapper.SqlServerDAO
+namespace DataMapper
 {
     using DomainModel;
 
     /// <summary>
-    /// Defines the <see cref="UserRepository" />.
+    /// Defines the <see cref="IBidderRepository" />.
     /// </summary>
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    public interface IBidderRepository : IRepository<Bidder>
     {
     }
 }

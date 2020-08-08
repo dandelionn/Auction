@@ -20,7 +20,7 @@ namespace TestDomainModel
         /// <summary>
         /// Defines the user.
         /// </summary>
-        private User user;
+        private Person user;
 
         /// <summary>
         /// Defines the context.
@@ -38,7 +38,7 @@ namespace TestDomainModel
         [TestInitialize]
         public void TestInit()
         {
-            user = new User();
+            user = new Person();
             context = new ValidationContext(user);
             results = new List<ValidationResult>();
         }

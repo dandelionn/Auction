@@ -24,11 +24,11 @@ namespace DataMapper.SqlServerDAO
         /// <summary>
         /// Gets the PersonRepository.
         /// </summary>
-        public IUserRepository PersonRepository
+        public IPersonRepository PersonRepository
         {
             get
             {
-                return new UserRepository();
+                return new PersonRepository();
             }
         }
 

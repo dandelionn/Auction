@@ -157,7 +157,7 @@ namespace TestDomainModel
         [TestMethod]
         public void TestMethodUsersListNotEmpty()
         {
-            product.Users.Add(new User());
+            product.Users.Add(new Person());
             context.MemberName = "Users";
 
             var result = Validator.TryValidateProperty(product.Users, context, results);

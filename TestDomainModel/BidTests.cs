@@ -50,7 +50,7 @@ namespace TestDomainModel
         public void TestMethodUserNull()
         {
             bid.User = null;
-            context.MemberName = nameof(User);
+            context.MemberName = nameof(Person);
 
             var result = Validator.TryValidateProperty(bid.User, context, results);
 
@@ -65,8 +65,8 @@ namespace TestDomainModel
         [TestMethod]
         public void TestMethodUserNotNull()
         {
-            bid.User = new User();
-            context.MemberName = nameof(User);
+            bid.User = new Person();
+            context.MemberName = nameof(Person);
 
             var result = Validator.TryValidateProperty(bid.User, context, results);
 

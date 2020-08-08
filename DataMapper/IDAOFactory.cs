@@ -18,7 +18,7 @@ namespace DataMapper
         /// <summary>
         /// Gets the PersonRepository.
         /// </summary>
-        IUserRepository PersonRepository { get; }
+        IPersonRepository PersonRepository { get; }
 
         /// <summary>
         /// Gets the CategoryRepository.

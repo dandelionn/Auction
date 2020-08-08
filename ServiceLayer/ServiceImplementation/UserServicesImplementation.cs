@@ -16,29 +16,29 @@ namespace ServiceLayer.ServiceImplementation
 
     public class UserServicesImplementation
     {
-        private IUserRepository userRepository;
+        private IPersonRepository userRepository;
 
-        public UserServicesImplementation(IUserRepository userRepository)
+        public UserServicesImplementation(IPersonRepository userRepository)
         {
             this.userRepository = userRepository;
         }
 
-        public void Delete(User entity)
+        public void Delete(Person entity)
         {
             userRepository.Delete(entity);
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<Person> GetAll()
         {
             return userRepository.Get().OrderBy(user => user.Name).ToList();
         }
 
-        public User GetByID(object id)
+        public Person GetByID(object id)
         {
             return userRepository.GetByID(id);
         }
 
-        public IList<ValidationResult> Insert(User entity)
+        public IList<ValidationResult> Insert(Person entity)
         {
             var results = EntityValidator.IsEntityValid(entity);
             if (results.Count == 0)
@@ -49,7 +49,7 @@ namespace ServiceLayer.ServiceImplementation
             return results;
         }
 
-        public IList<ValidationResult> Update(User entity)
+        public IList<ValidationResult> Update(Person entity)
         {
             var results = EntityValidator.IsEntityValid(entity);
             {

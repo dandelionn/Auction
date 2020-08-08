@@ -7,12 +7,12 @@ namespace TestServiceLayer
     [TestClass]
     public class UserServicesImplementationTests
     {
-        internal Mock<IUserRepository> mockRepository;
+        internal Mock<IPersonRepository> mockRepository;
 
         [TestInitialize]
         public void TestInit()
         {
-            mockRepository = new Mock<IUserRepository>();
+            mockRepository = new Mock<IPersonRepository>();
         }
     }
 }

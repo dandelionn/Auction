@@ -1,16 +1,16 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="IPersonService.cs" company="Transilvania University of Brasov">    
+// <copyright file="IUserProfileRepository.cs" company="Transilvania University of Brasov">    
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace ServiceLayer
+namespace DataMapper
 {
     using DomainModel;
 
     /// <summary>
-    /// Defines the <see cref="IUserService" />.
+    /// Defines the <see cref="IUserProfileRepository" />.
     /// </summary>
-    interface IUserService : IService<Person>
+    public interface IUserProfileRepository : IRepository<UserProfile>
     {
     }
 }

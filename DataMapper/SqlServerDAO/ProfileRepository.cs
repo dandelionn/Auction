@@ -1,16 +1,16 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="IPersonService.cs" company="Transilvania University of Brasov">    
+// <copyright file="UserProfileRepository.cs" company="Transilvania University of Brasov">    
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace ServiceLayer
+namespace DataMapper.SqlServerDAO
 {
     using DomainModel;
 
     /// <summary>
-    /// Defines the <see cref="IUserService" />.
+    /// Defines the <see cref="UserProfileRepository" />.
     /// </summary>
-    interface IUserService : IService<Person>
+    public class UserProfileRepository : BaseRepository<UserProfile>, IUserProfileRepository
     {
     }
 }

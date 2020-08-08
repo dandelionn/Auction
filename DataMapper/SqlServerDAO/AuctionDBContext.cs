@@ -28,7 +28,7 @@ namespace Library.DataMapper
         /// <summary>
         /// Gets or sets the Person.
         /// </summary>
-        public virtual DbSet<User> Person { get; set; }
+        public virtual DbSet<Person> Person { get; set; }
 
         /// <summary>
         /// Gets or sets the Category.
