@@ -354,5 +354,9 @@ namespace DomainModel.Validators
         public const string EmailRequired = "Email is required";
 
         public const string PhoneNumberRequired = "Phone number is required";
+
+        public const string InvalidUsername = "Username is not valid";
+
+        public const string InvalidPassword = "Password is invalid";
     }
 }

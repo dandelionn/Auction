@@ -6,12 +6,13 @@
 namespace DomainModel
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     /// <summary>
     /// Defines the <see cref="Bidder" />.
     /// </summary>
-    public class Bidder
+    public class Bidder : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Bidder"/> class.
@@ -33,5 +34,11 @@ namespace DomainModel
         public List<Bid> Bids { get; set; }
 
         public virtual Person Person { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var results = new List<ValidationResult>();
+            return results;
+        }
     }
 }

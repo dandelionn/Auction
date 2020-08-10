@@ -11,11 +11,11 @@ namespace ServiceLayer.ServiceImplementation
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
-    class BidServicesImplementation: IBidService
+    class BidServices: IBidService
     {
         private IBidRepository bidRepository;
 
-        public BidServicesImplementation(IBidRepository bidRepository)
+        public BidServices(IBidRepository bidRepository)
         {
             this.bidRepository = bidRepository;
         }

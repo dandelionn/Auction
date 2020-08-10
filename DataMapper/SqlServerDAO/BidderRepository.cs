@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="BidderRepository.cs" company="Transilvania University of Brasov">    
+// Author: Paul Michea  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 namespace DataMapper.SqlServerDAO
 {
-    class BidderRepository
+    using DomainModel;
+
+    /// <summary>
+    /// Defines the <see cref="SellerRepository" />.
+    /// </summary>
+    public class BidderRepository : BaseRepository<Bidder>, IBidderRepository
     {
     }
 }

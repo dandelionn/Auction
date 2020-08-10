@@ -5,14 +5,14 @@ using Moq;
 namespace TestServiceLayer
 {
     [TestClass]
-    public class BidServicesImplementationTests
+    public class ProductServicesTests
     {
-        internal Mock<IBidRepository> mockRepository;
+        internal Mock<IProductRepository> mockRepository;
 
         [TestInitialize]
         public void TestInit()
         {
-            mockRepository = new Mock<IBidRepository>();
+            mockRepository = new Mock<IProductRepository>();
         }
     }
 }

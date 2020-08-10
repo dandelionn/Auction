@@ -11,11 +11,11 @@ namespace ServiceLayer.ServiceImplementation
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
-    public class CategoryServicesImplementation
+    public class CategoryServices
     {
         private ICategoryRepository categoryRepository;
 
-        public CategoryServicesImplementation(ICategoryRepository categoryRepository)
+        public CategoryServices(ICategoryRepository categoryRepository)
         {
             this.categoryRepository = categoryRepository;
         }

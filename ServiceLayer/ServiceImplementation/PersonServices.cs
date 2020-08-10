@@ -14,11 +14,11 @@ namespace ServiceLayer.ServiceImplementation
     using DataMapper;
     using DomainModel;
 
-    public class UserServicesImplementation
+    public class PersonServices
     {
         private IPersonRepository userRepository;
 
-        public UserServicesImplementation(IPersonRepository userRepository)
+        public PersonServices(IPersonRepository userRepository)
         {
             this.userRepository = userRepository;
         }

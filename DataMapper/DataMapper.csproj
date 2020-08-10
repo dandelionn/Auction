@@ -95,9 +95,9 @@
     <Compile Include="SqlServerDAO\AuctionDBContext.cs" />
     <Compile Include="SqlServerDAO\PersonRepository.cs" />
     <Compile Include="SqlServerDAO\ProductRepository.cs" />
-    <Compile Include="SqlServerDAO\ProfileRepository.cs" />
     <Compile Include="SqlServerDAO\SellerRepository.cs" />
     <Compile Include="SqlServerDAO\SQLServerDAOFactory.cs" />
+    <Compile Include="SqlServerDAO\UserProfileRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

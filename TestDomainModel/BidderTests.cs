@@ -10,6 +10,7 @@ namespace TestDomainModel
     using DomainModel;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    [TestClass]
     class BidderTests
     {
         private Bidder bidder;

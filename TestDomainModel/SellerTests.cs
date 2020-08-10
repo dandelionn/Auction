@@ -10,6 +10,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TestDomainModel
 {
+    [TestClass]
     public class SellerTests
     {
         private Seller seller;

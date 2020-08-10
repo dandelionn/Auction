@@ -11,6 +11,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TestDomainModel
 {
+    [TestClass]
     public class UserProfileTests
     {
         private UserProfile userProfile;
@@ -61,6 +62,54 @@ namespace TestDomainModel
             Assert.AreEqual(1, results.Count);
             var res = results[0];
             Assert.AreEqual(ErrorMessages.InvalidEmailAddress, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void TestMethodInvalidUsername()
+        {
+            userProfile.Username = "._us_.er_";
+            context.MemberName = nameof(UserProfile.Username);
+
+            var result = Validator.TryValidateProperty(userProfile.Username, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void TestMethodValidUsername()
+        {
+            userProfile.Username = "paul.michea";
+            context.MemberName = nameof(UserProfile.Username);
+
+            var result = Validator.TryValidateProperty(userProfile.Username, context, results);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        [TestMethod]
+        public void TestMethodInvalidPasswod()
+        {
+            userProfile.Password = "123456";
+            context.MemberName = nameof(UserProfile.Password);
+
+            var result = Validator.TryValidateProperty(userProfile.Password, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidPassword, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void TestMethodValidPassword()
+        {
+            userProfile.Password = "Password0&";
+            context.MemberName = nameof(UserProfile.Password);
+
+            var result = Validator.TryValidateProperty(userProfile.Password, context, results);
+
+            Assert.AreEqual(0, results.Count);
         }
     }
 }

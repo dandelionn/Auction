@@ -6,9 +6,10 @@
 namespace DomainModel
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Seller
+    public class Seller : IValidatableObject
     {
         public Seller()
         {
@@ -22,5 +23,11 @@ namespace DomainModel
         public List<Auction> Auctions { get; set; }
         public List<Product> Products { get; set; }
         public virtual Person Person { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var results = new List<ValidationResult>();
+            return results;
+        }
     }
 }

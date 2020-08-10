@@ -5,7 +5,7 @@ using Moq;
 namespace TestServiceLayer
 {
     [TestClass]
-    public class AuctionServicesImplementationTests
+    public class AuctionServicesTests
     {
         internal Mock<IAuctionRepository> mockRepository;
 
