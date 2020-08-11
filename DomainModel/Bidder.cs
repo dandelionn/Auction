@@ -9,29 +9,12 @@ namespace DomainModel
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    /// <summary>
-    /// Defines the <see cref="Bidder" />.
-    /// </summary>
     public class Bidder : IValidatableObject
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Bidder"/> class.
-        /// </summary>
-        public Bidder()
-        {
-            this.Bids = new List<Bid>();
-        }
-
-        /// <summary>
-        /// Gets or sets the BidderId.
-        /// </summary>
         [ForeignKey(nameof(Person))]
         public int Id { get; set; }
 
-        /// <summary>
-        /// Gets or sets the Bids.
-        /// </summary>
-        public List<Bid> Bids { get; set; }
+        public List<Bid> Bids { get; set; } = new List<Bid>();
 
         public virtual Person Person { get; set; }
 

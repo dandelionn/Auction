@@ -74,14 +74,31 @@ NCOVER(licenta de student) + NUNIT
 .NET Framework
  */
 
+using DataMapper.SqlServerDAO;
+using DomainModel;
+using ServiceLayer.ServiceImplementation;
+using System;
+
 namespace Application
 {
-
     class Program
     {
         static void Main()
         {
+            var userProfile = new UserProfile
+            {
+                Username = "dandelionn",
+                Password = "Password0&",
+                Email = "dan@email.com",
+            };
 
+            var userProfileServices = new UserProfileServices(new UserProfileRepository());
+            userProfileServices.Insert(userProfile);
+            var list = userProfileServices.GetAll();
+            foreach(var item in list)
+            {
+                Console.WriteLine(item.Id.ToString(), item.Username);
+            }
         }
     }
 }

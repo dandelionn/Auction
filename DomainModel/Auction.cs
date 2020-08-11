@@ -13,12 +13,6 @@ namespace DomainModel
 
     public class Auction : IValidatableObject
     {
-        public Auction()
-        {
-            this.Bids = new List<Bid>();
-            this.Products = new List<Product>();
-        }
-
         public int Id { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.NameRequired)]
@@ -55,9 +49,9 @@ namespace DomainModel
 
         [Required(ErrorMessage = ErrorMessages.ProductsRequired)] //test
         [MustHaveOneElement(ErrorMessage = ErrorMessages.LengthMustBeGreaterThanZero)]
-        public List<Product> Products { get; set; }
+        public List<Product> Products { get; set; } = new List<Product>();
 
-        public List<Bid> Bids { get; set; }
+        public List<Bid> Bids { get; set; } = new List<Bid>();
 
         [Required(ErrorMessage = ErrorMessages.SellerRequired)]
         public Seller Seller { get; set; }

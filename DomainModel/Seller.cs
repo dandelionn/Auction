@@ -11,17 +11,13 @@ namespace DomainModel
 
     public class Seller : IValidatableObject
     {
-        public Seller()
-        {
-            this.Auctions = new List<Auction>();
-            this.Products = new List<Product>();
-        }
-
         [ForeignKey(nameof(Person))]
         public int Id { get; set; }
 
-        public List<Auction> Auctions { get; set; }
-        public List<Product> Products { get; set; }
+        public List<Auction> Auctions { get; set; } = new List<Auction>();
+
+        public List<Product> Products { get; set; } = new List<Product>();
+
         public virtual Person Person { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

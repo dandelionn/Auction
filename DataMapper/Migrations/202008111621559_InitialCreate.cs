@@ -14,12 +14,12 @@
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false, maxLength: 50),
                         Address = c.String(nullable: false, maxLength: 100),
+                        BeginDate = c.DateTime(nullable: false),
+                        EndDate = c.DateTime(nullable: false),
                         CurrencyName = c.String(nullable: false),
                         BeginPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
                         CurrentPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        BeginDate = c.DateTime(nullable: false),
-                        EndDate = c.DateTime(nullable: false),
-                        Status = c.Boolean(nullable: false),
+                        Active = c.Boolean(nullable: false),
                         Seller_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -31,7 +31,7 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Value = c.Double(nullable: false),
+                        Value = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Auction_Id = c.Int(nullable: false),
                         Bidder_Id = c.Int(nullable: false),
                     })
@@ -55,14 +55,15 @@
                 "dbo.People",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false),
                         Name = c.String(nullable: false, maxLength: 50),
                         Surname = c.String(nullable: false, maxLength: 50),
                         Address = c.String(maxLength: 100),
-                        PhoneNumber = c.String(),
-                        Email = c.String(),
+                        PhoneNumber = c.String(nullable: false),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.UserProfiles", t => t.Id)
+                .Index(t => t.Id);
             
             CreateTable(
                 "dbo.Sellers",
@@ -94,6 +95,19 @@
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Categories", t => t.Category_Id)
                 .Index(t => t.Category_Id);
+            
+            CreateTable(
+                "dbo.UserProfiles",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Username = c.String(maxLength: 20),
+                        Password = c.String(nullable: false),
+                        Email = c.String(nullable: false, maxLength: 100),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Username, unique: true)
+                .Index(t => t.Email, unique: true);
             
             CreateTable(
                 "dbo.ProductAuctions",
@@ -141,6 +155,7 @@
             DropForeignKey("dbo.Auctions", "Seller_Id", "dbo.Sellers");
             DropForeignKey("dbo.Bids", "Bidder_Id", "dbo.Bidders");
             DropForeignKey("dbo.Bidders", "Id", "dbo.People");
+            DropForeignKey("dbo.People", "Id", "dbo.UserProfiles");
             DropForeignKey("dbo.ProductSellers", "Seller_Id", "dbo.Sellers");
             DropForeignKey("dbo.ProductSellers", "Product_Id", "dbo.Products");
             DropForeignKey("dbo.CategoryProducts", "Product_Id", "dbo.Products");
@@ -156,8 +171,11 @@
             DropIndex("dbo.CategoryProducts", new[] { "Category_Id" });
             DropIndex("dbo.ProductAuctions", new[] { "Auction_Id" });
             DropIndex("dbo.ProductAuctions", new[] { "Product_Id" });
+            DropIndex("dbo.UserProfiles", new[] { "Email" });
+            DropIndex("dbo.UserProfiles", new[] { "Username" });
             DropIndex("dbo.Categories", new[] { "Category_Id" });
             DropIndex("dbo.Sellers", new[] { "Id" });
+            DropIndex("dbo.People", new[] { "Id" });
             DropIndex("dbo.Bidders", new[] { "Id" });
             DropIndex("dbo.Bids", new[] { "Bidder_Id" });
             DropIndex("dbo.Bids", new[] { "Auction_Id" });
@@ -165,6 +183,7 @@
             DropTable("dbo.ProductSellers");
             DropTable("dbo.CategoryProducts");
             DropTable("dbo.ProductAuctions");
+            DropTable("dbo.UserProfiles");
             DropTable("dbo.Categories");
             DropTable("dbo.Products");
             DropTable("dbo.Sellers");

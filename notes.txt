@@ -1,0 +1,7 @@
+
+
+# Regular expression to validate username
+https://stackoverflow.com/questions/12018245/regular-expression-to-validate-username
+
+# Regular expression to validate password
+https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a

@@ -11,13 +11,6 @@ namespace DomainModel
 
     public class Product : IValidatableObject
     {
-        public Product()
-        {
-            this.Sellers = new List<Seller>();
-            this.Categories = new List<Category>();
-            this.Auctions = new List<Auction>();
-        }
-
         public int Id { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.NameRequired)]
@@ -26,13 +19,13 @@ namespace DomainModel
 
         [Required(ErrorMessage = ErrorMessages.CategoriesRequired)]
         [MustHaveOneElement(ErrorMessage = ErrorMessages.LengthMustBeGreaterThanZero)]
-        public List<Category> Categories { get; set; }
+        public List<Category> Categories { get; set; } = new List<Category>();
 
         [Required(ErrorMessage = ErrorMessages.SellersRequired)]
         [MustHaveOneElement(ErrorMessage = ErrorMessages.LengthMustBeGreaterThanZero)]
-        public List<Seller> Sellers { get; set; }
+        public List<Seller> Sellers { get; set; } = new List<Seller>();
 
-        public List<Auction> Auctions { get; set; }
+        public List<Auction> Auctions { get; set; } = new List<Auction>();
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

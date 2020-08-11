@@ -12,20 +12,24 @@ namespace DomainModel
 
     public class UserProfile : IValidatableObject
     {
-        [ForeignKey(nameof(Person))]
+        [Key]
         public int Id { get; set; }
 
-        //https://stackoverflow.com/questions/12018245/regular-expression-to-validate-username
+        public Person Person { get; set; }
+
         [RegularExpression(@"^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$", ErrorMessage = ErrorMessages.InvalidUsername)]
+        [StringLength(20)]
+        [Index(IsUnique = true)]
         public string Username { get; set; }
 
-        //https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
         [Required(ErrorMessage = ErrorMessages.PasswordRequired)]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", ErrorMessage = ErrorMessages.InvalidPassword)]
         public string Password { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.EmailRequired)]
         [EmailAddress(ErrorMessage = ErrorMessages.InvalidEmailAddress)]
+        [Index(IsUnique = true)]
+        [StringLength(100)]
         public string Email { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

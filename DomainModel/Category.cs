@@ -11,21 +11,15 @@ namespace DomainModel
 
     public class Category : IValidatableObject
     {
-        public Category()
-        {
-            this.Products = new List<Product>();
-            this.ParentCategories = new List<Category>();
-        }
-
         public int Id { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.NameRequired)]
         [StringLength(50, MinimumLength = 2, ErrorMessage = ErrorMessages.LengthBetween2And50)]
         public string Name { get; set; }
 
-        public List<Product> Products { get; set; }
+        public List<Product> Products { get; set; } = new List<Product>();
 
-        public List<Category> ParentCategories { get; set; }
+        public List<Category> ParentCategories { get; set; } = new List<Category>();
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

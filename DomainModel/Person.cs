@@ -12,14 +12,13 @@ namespace DomainModel
 
     public class Person : IValidatableObject
     {
-        public Person()
-        {
-        }
+        public virtual UserProfile UserProfile { get; set; }
 
         public Bidder Bidder { get; set; }
 
         public Seller Seller { get; set; }
 
+        [ForeignKey(nameof(UserProfile))]
         public int Id { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.NameRequired)]

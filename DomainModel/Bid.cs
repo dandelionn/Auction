@@ -11,10 +11,6 @@ namespace DomainModel
 
     public class Bid : IValidatableObject
     {
-        public Bid()
-        {
-        }
-
         public int Id { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.BidderRequired)]

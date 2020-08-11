@@ -28,21 +28,27 @@ namespace Library.DataMapper
         /// <summary>
         /// Gets or sets the Person.
         /// </summary>
-        public virtual DbSet<Person> Person { get; set; }
+        public virtual DbSet<Person> People { get; set; }
 
         /// <summary>
         /// Gets or sets the Category.
         /// </summary>
-        public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
 
         /// <summary>
         /// Gets or sets the Product.
         /// </summary>
-        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
 
         /// <summary>
         /// Gets or sets the Bids.
         /// </summary>
         public virtual DbSet<Bid> Bids { get; set; }
+
+        public virtual DbSet<Bidder> Bidders { get; set; }
+
+        public virtual DbSet<Seller> Sellers { get; set; }
+
+        public virtual DbSet<UserProfile> UserProfiles { get; set; }
     }
 }
