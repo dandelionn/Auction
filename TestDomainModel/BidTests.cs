@@ -32,7 +32,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodBidderNull()
+        public void Bidder_Null()
         {
             bid.Bidder = null;
             context.MemberName = nameof(Bidder);
@@ -45,7 +45,18 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodAuctionNull()
+        public void Bidder_NotNull()
+        {
+            bid.Bidder = new Bidder();
+            context.MemberName = nameof(Bidder);
+
+            var result = Validator.TryValidateProperty(bid.Bidder, context, results);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        [TestMethod]
+        public void Auction_Null()
         {
             bid.Auction = null;
             context.MemberName = nameof(Auction);
@@ -58,7 +69,18 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodNullValue()
+        public void Auction_NotNull()
+        {
+            bid.Auction = new Auction();
+            context.MemberName = nameof(Auction);
+
+            var result = Validator.TryValidateProperty(bid.Auction, context, results);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        [TestMethod]
+        public void Value_Null()
         {
             bid.Value = null;
             context.MemberName = nameof(Bid.Value);
@@ -71,18 +93,20 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodValidValue()
+        public void Value_Zero()
         {
-            bid.Value = (decimal)25.6;
+            bid.Value = (decimal)0;
             context.MemberName = nameof(Bid.Value);
 
             var result = Validator.TryValidateProperty(bid.Value, context, results);
 
-            Assert.AreEqual(0, results.Count);
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.ValueShouldNotBeZero, res.ErrorMessage);
         }
 
         [TestMethod]
-        public void TestMethodNegativeValue()
+        public void Value_Negative()
         {
             bid.Value = (decimal)-25.6;
             context.MemberName = nameof(Bid.Value);
@@ -92,6 +116,17 @@ namespace TestDomainModel
             Assert.AreEqual(1, results.Count);
             var res = results[0];
             Assert.AreEqual(ErrorMessages.NegativeValue, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Value_Valid()
+        {
+            bid.Value = (decimal)25.6;
+            context.MemberName = nameof(Bid.Value);
+
+            var result = Validator.TryValidateProperty(bid.Value, context, results);
+
+            Assert.AreEqual(0, results.Count);
         }
     }
 }

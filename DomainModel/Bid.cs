@@ -21,6 +21,7 @@ namespace DomainModel
 
         [Required(ErrorMessage = ErrorMessages.ValueRequired)]
         [Range(0, double.MaxValue, ErrorMessage = ErrorMessages.NegativeValue)]
+        [RegularExpression("(.*[1-9].*)|(.*[.].*[1-9].*)", ErrorMessage = ErrorMessages.ValueShouldNotBeZero)] // Whatever but not zero
         public decimal? Value { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

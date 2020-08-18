@@ -12,5 +12,6 @@ namespace DataMapper.SqlServerDAO
     /// </summary>
     public class SellerRepository : BaseRepository<Seller>, ISellerRepository
     {
+
     }
 }

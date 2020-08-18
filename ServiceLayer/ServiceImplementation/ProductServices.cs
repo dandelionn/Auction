@@ -11,7 +11,7 @@ namespace ServiceLayer.ServiceImplementation
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
-    class ProductServices: IProductService
+    public class ProductServices: IProductServices
     {
         private IProductRepository productRepository;
 

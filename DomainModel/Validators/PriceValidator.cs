@@ -36,7 +36,7 @@ namespace DomainModel.Validators
 
             if (price < GetMinAuctionBeginPrice(currencyName))
             {
-                return new ValidationResult(ErrorMessages.AuctionPriceTooSmall);
+                return new ValidationResult(ErrorMessages.AuctionStartPriceTooSmall);
             }
 
             return ValidationResult.Success;

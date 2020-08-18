@@ -29,7 +29,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodNullEmail()
+        public void Email_Null()
         {
             context.MemberName = nameof(UserProfile.Email);
 
@@ -41,7 +41,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodValidEmail()
+        public void Email_Valid()
         {
             userProfile.Email = "michea.paul@yahoo.com";
             context.MemberName = nameof(UserProfile.Email);
@@ -52,7 +52,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodInvalidEmail()
+        public void Email_Invalid()
         {
             userProfile.Email = "michea.paul.com";
             context.MemberName = nameof(UserProfile.Email);
@@ -65,9 +65,22 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodInvalidUsername()
+        public void Username_Null()
         {
-            userProfile.Username = "._us_.er_";
+            userProfile.Username = null;
+            context.MemberName = nameof(UserProfile.Username);
+
+            var result = Validator.TryValidateProperty(userProfile.Username, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.UsernameRequired, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Username_TooLong()
+        {
+            userProfile.Username = "usernameeeeeeeeeeeeeeee";
             context.MemberName = nameof(UserProfile.Username);
 
             var result = Validator.TryValidateProperty(userProfile.Username, context, results);
@@ -78,9 +91,139 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodValidUsername()
+        public void Username_TooShort()
         {
-            userProfile.Username = "paul.michea";
+            userProfile.Username = "usern";
+            context.MemberName = nameof(UserProfile.Username);
+
+            var result = Validator.TryValidateProperty(userProfile.Username, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Username_PointAtBegin()
+        {
+            userProfile.Username = ".paul.michea";
+            context.MemberName = nameof(UserProfile.Username);
+
+            var result = Validator.TryValidateProperty(userProfile.Username, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Username_UnderlineAtBegin()
+        {
+            userProfile.Username = "_paul.michea";
+            context.MemberName = nameof(UserProfile.Username);
+
+            var result = Validator.TryValidateProperty(userProfile.Username, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Username_PointUnderlineInside()
+        {
+            userProfile.Username = "paul._michea";
+            context.MemberName = nameof(UserProfile.Username);
+
+            var result = Validator.TryValidateProperty(userProfile.Username, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Username_UnderlinePointInside()
+        {
+            userProfile.Username = "paul_.michea";
+            context.MemberName = nameof(UserProfile.Username);
+
+            var result = Validator.TryValidateProperty(userProfile.Username, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Username_MultipleUnderlineInside()
+        {
+            userProfile.Username = "paul__michea";
+            context.MemberName = nameof(UserProfile.Username);
+
+            var result = Validator.TryValidateProperty(userProfile.Username, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Username_MultiplePointInside()
+        {
+            userProfile.Username = "paul..michea";
+            context.MemberName = nameof(UserProfile.Username);
+
+            var result = Validator.TryValidateProperty(userProfile.Username, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Username_ForbiddenCharacter()
+        {
+            userProfile.Username = "paul&michea";
+            context.MemberName = nameof(UserProfile.Username);
+
+            var result = Validator.TryValidateProperty(userProfile.Username, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Username_PointAtEnd()
+        {
+            userProfile.Username = "paulmichea.";
+            context.MemberName = nameof(UserProfile.Username);
+
+            var result = Validator.TryValidateProperty(userProfile.Username, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Username_UnderlineAtEnd()
+        {
+            userProfile.Username = "paulmichea_";
+            context.MemberName = nameof(UserProfile.Username);
+
+            var result = Validator.TryValidateProperty(userProfile.Username, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Username_Valid()
+        {
+            userProfile.Username = "paul.michea0";
             context.MemberName = nameof(UserProfile.Username);
 
             var result = Validator.TryValidateProperty(userProfile.Username, context, results);
@@ -89,9 +232,9 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodInvalidPasswod()
+        public void Password_TooLong()
         {
-            userProfile.Password = "123456";
+            userProfile.Password = "Password0&aaaaaaaa";
             context.MemberName = nameof(UserProfile.Password);
 
             var result = Validator.TryValidateProperty(userProfile.Password, context, results);
@@ -102,7 +245,72 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodValidPassword()
+        public void Password_TooShort()
+        {
+            userProfile.Password = "Pass0&";
+            context.MemberName = nameof(UserProfile.Password);
+
+            var result = Validator.TryValidateProperty(userProfile.Password, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidPassword, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Password_NoUppercaseLetter()
+        {
+            userProfile.Password = "password0&";
+            context.MemberName = nameof(UserProfile.Password);
+
+            var result = Validator.TryValidateProperty(userProfile.Password, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidPassword, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Password_NoLowercaseLetter()
+        {
+            userProfile.Password = "PASSWORD0&";
+            context.MemberName = nameof(UserProfile.Password);
+
+            var result = Validator.TryValidateProperty(userProfile.Password, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidPassword, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Password_NoNumber()
+        {
+            userProfile.Password = "Password&";
+            context.MemberName = nameof(UserProfile.Password);
+
+            var result = Validator.TryValidateProperty(userProfile.Password, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidPassword, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Password_NoSpecialCharacter()
+        {
+            userProfile.Password = "Password0";
+            context.MemberName = nameof(UserProfile.Password);
+
+            var result = Validator.TryValidateProperty(userProfile.Password, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidPassword, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Password_Valid()
         {
             userProfile.Password = "Password0&";
             context.MemberName = nameof(UserProfile.Password);
@@ -110,6 +318,19 @@ namespace TestDomainModel
             var result = Validator.TryValidateProperty(userProfile.Password, context, results);
 
             Assert.AreEqual(0, results.Count);
+        }
+
+        [TestMethod]
+        public void Password_Null()
+        {
+            userProfile.Password = null;
+            context.MemberName = nameof(UserProfile.Password);
+
+            var result = Validator.TryValidateProperty(userProfile.Password, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.PasswordRequired, res.ErrorMessage);
         }
     }
 }

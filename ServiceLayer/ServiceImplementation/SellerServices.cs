@@ -14,11 +14,11 @@ namespace ServiceLayer.ServiceImplementation
     using DataMapper;
     using DomainModel;
 
-    public class SellerProfileServices
+    public class SellerServices
     {
         private ISellerRepository sellerRepository;
 
-        public SellerProfileServices(ISellerRepository sellerRepository)
+        public SellerServices(ISellerRepository sellerRepository)
         {
             this.sellerRepository = sellerRepository;
         }

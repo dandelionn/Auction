@@ -82,6 +82,9 @@
     <Compile Include="UserProfileServicesTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\DomainModel\App.config">
+      <Link>App.config</Link>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,8 @@
 namespace DataMapper.SqlServerDAO
 {
     using DomainModel;
+    using System.Configuration;
+    using System.Linq;
 
     /// <summary>
     /// Defines the <see cref="PersonRepository" />.

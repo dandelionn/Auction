@@ -8,9 +8,9 @@ namespace ServiceLayer
     using DomainModel;
 
     /// <summary>
-    /// Defines the <see cref="IAuctionService" />.
+    /// Defines the <see cref="IAuctionServices" />.
     /// </summary>
-    public interface IAuctionService : IService<Auction>
+    public interface IAuctionServices : IService<Auction>
     {
     }
 }

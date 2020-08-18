@@ -29,7 +29,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodNullName()
+        public void Name_Null()
         {
             person.Name = null;
             context.MemberName = nameof(Person.Name);
@@ -42,7 +42,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodValidName()
+        public void Name_Valid()
         {
             person.Name = "RandomName";
             context.MemberName = nameof(Person.Name);
@@ -52,7 +52,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodNameTooLong()
+        public void Name_TooLong()
         {
             person.Name = new string('a', 51);
             context.MemberName = nameof(Person.Name);
@@ -65,7 +65,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodNameTooShort()
+        public void Name_TooShort()
         {
             person.Name = new string('a', 1);
             context.MemberName = nameof(Person.Name);
@@ -78,7 +78,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodNullSurname()
+        public void Surname_Null()
         {
             person.Surname = null;
             context.MemberName = nameof(Person.Surname);
@@ -91,7 +91,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodValidSurname()
+        public void Surname_Valid()
         {
             person.Surname = "RandomSurname";
             context.MemberName = nameof(Person.Surname);
@@ -102,7 +102,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodSurnameTooLong()
+        public void Surname_TooLong()
         {
             person.Surname = new string('a', 51);
             context.MemberName = nameof(Person.Surname);
@@ -115,7 +115,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodSurnameTooShort()
+        public void Surname_TooShort()
         {
             person.Surname = new string('a', 1);
             context.MemberName = nameof(Person.Surname);
@@ -128,7 +128,18 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodValidAddress()
+        public void Address_Null()
+        {
+            person.Name = null;
+            context.MemberName = nameof(Person.Address);
+
+            var result = Validator.TryValidateProperty(person.Address, context, results);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        [TestMethod]
+        public void Address_Valid()
         {
             person.Name = "RandomAdress";
             context.MemberName = nameof(Person.Address);
@@ -139,7 +150,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodTooLongAddress()
+        public void Address_TooLong()
         {
             person.Address = new string('a', 101);
             context.MemberName = nameof(Person.Address);
@@ -152,7 +163,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodAddressTooShort()
+        public void Address_TooShort()
         {
             person.Address = new string('a', 1);
             context.MemberName = nameof(Person.Address);
@@ -165,7 +176,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodNullPhoneNumber()
+        public void PhoneNumber_Null()
         {
             context.MemberName = nameof(Person.PhoneNumber);
 
@@ -177,7 +188,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodValidPhoneNumber()
+        public void PhoneNumber_Valid()
         {
             person.PhoneNumber = "0758988360";
             context.MemberName = nameof(Person.PhoneNumber);
@@ -188,7 +199,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodInvalidPhoneNumber()
+        public void PhoneNumber_TooShort()
         {
             person.PhoneNumber = "000";
             context.MemberName = nameof(Person.PhoneNumber);
@@ -198,6 +209,44 @@ namespace TestDomainModel
             Assert.AreEqual(1, results.Count);
             var res = results[0];
             Assert.AreEqual(ErrorMessages.InvalidPhoneNumber, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void PhoneNumber_TooLong()
+        {
+            person.PhoneNumber = "1230003420000000430002340000000000";
+            context.MemberName = nameof(Person.PhoneNumber);
+
+            var result = Validator.TryValidateProperty(person.PhoneNumber, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidPhoneNumber, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void PhoneNumber_InvalidCharacter()
+        {
+            person.PhoneNumber = "00%34324223423432";
+            context.MemberName = nameof(Person.PhoneNumber);
+
+            var result = Validator.TryValidateProperty(person.PhoneNumber, context, results);
+
+            Assert.AreEqual(1, results.Count);
+            var res = results[0];
+            Assert.AreEqual(ErrorMessages.InvalidPhoneNumber, res.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void Scores_NotNull()
+        {
+            Assert.IsNotNull(person.Scores); ///test for pozitive numbers, between 1 and 10
+        }
+        
+        [TestMethod]
+        public void BanEndDate_NotNull()
+        {
+            Assert.IsNotNull(person.BanEndDate);
         }
     }
 }

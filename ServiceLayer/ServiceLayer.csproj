@@ -37,6 +37,7 @@
       <HintPath>..\packages\System.ComponentModel.Annotations.4.4.1\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,14 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAuctionService.cs" />
-    <Compile Include="IBidderService.cs" />
-    <Compile Include="IBidService.cs" />
-    <Compile Include="ICategoryService.cs" />
-    <Compile Include="IPersonService.cs" />
-    <Compile Include="IProductService.cs" />
-    <Compile Include="ISellerService.cs" />
-    <Compile Include="IService.cs" />
+    <Compile Include="IAuctionServices.cs" />
+    <Compile Include="IBidderServices.cs" />
+    <Compile Include="IBidServices.cs" />
+    <Compile Include="ICategoryServices.cs" />
+    <Compile Include="IPersonServices.cs" />
+    <Compile Include="IProductServices.cs" />
+    <Compile Include="ISellerServices.cs" />
+    <Compile Include="IServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceImplementation\AuctionServices.cs" />
     <Compile Include="ServiceImplementation\BidderServices.cs" />
@@ -64,7 +65,7 @@
     <Compile Include="ServiceImplementation\PersonServices.cs" />
     <Compile Include="ServiceImplementation\ProductServices.cs" />
     <Compile Include="ServiceImplementation\UserProfileServices.cs" />
-    <Compile Include="UserProfileService.cs" />
+    <Compile Include="IUserProfileServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataMapper\DataMapper.csproj">
@@ -77,6 +78,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\DomainModel\App.config">
+      <Link>App.config</Link>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

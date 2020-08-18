@@ -69,8 +69,6 @@
     <Compile Include="Validators\PriceValidator.cs" />
     <Compile Include="Validators\CurrencyNameValidator.cs" />
     <Compile Include="Validators\RequiredPhoneNumberOrEmail.cs" />
-    <Compile Include="Validators\EndDateValidator.cs" />
-    <Compile Include="Validators\BeginDateValidator.cs" />
     <Compile Include="Helpers\ErrorMessages.cs" />
     <Compile Include="Validators\MustHaveOneElementAttribute.cs" />
   </ItemGroup>

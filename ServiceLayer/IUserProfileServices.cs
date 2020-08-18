@@ -8,9 +8,9 @@ namespace ServiceLayer
     using DomainModel;
 
     /// <summary>
-    /// Defines the <see cref="IUserProfileService" />.
+    /// Defines the <see cref="IUserProfileServices" />.
     /// </summary>
-    interface IUserProfile : IService<UserProfile>
+    interface IUserProfileServices : IService<UserProfile>
     {
     }
 }

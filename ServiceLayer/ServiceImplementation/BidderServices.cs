@@ -5,20 +5,17 @@
 //-----------------------------------------------------------------------
 namespace ServiceLayer.ServiceImplementation
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using DataMapper;
     using DomainModel;
 
-    public class BidderProfileServices
+    public class BidderServices
     {
         private IBidderRepository bidderRepository;
 
-        public BidderProfileServices(IBidderRepository bidderRepository)
+        public BidderServices(IBidderRepository bidderRepository)
         {
             this.bidderRepository = bidderRepository;
         }

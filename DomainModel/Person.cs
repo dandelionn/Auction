@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace DomainModel
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -35,6 +36,10 @@ namespace DomainModel
         [Required(ErrorMessage = ErrorMessages.PhoneNumberRequired)]
         [RegularExpression(@"^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|\-)?([0-9]{3}(\s|\.|\-|)){2}$", ErrorMessage = ErrorMessages.InvalidPhoneNumber)]
         public string PhoneNumber { get; set; }
+
+        public List<int> Scores { get; set; } = new List<int>();
+
+        public DateTime BanEndDate { get; set; } = new DateTime(1900, 1, 1);
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

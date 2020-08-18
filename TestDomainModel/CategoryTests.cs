@@ -35,7 +35,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodValidName()
+        public void Name_Valid()
         {
             category.Name = "RandomName";
             context.MemberName = nameof(Category.Name);
@@ -46,7 +46,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodNameTooLong()
+        public void Name_TooLong()
         {
             category.Name = new string('a', 51);
             context.MemberName = nameof(Category.Name);
@@ -59,7 +59,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodNameTooShort()
+        public void Name_TooShort()
         {
             category.Name = new string('a', 1);
             context.MemberName = nameof(Category.Name);
@@ -72,7 +72,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodNullName()
+        public void Name_Null()
         {
             category.Name = null;
             context.MemberName = nameof(Category.Name);
@@ -85,13 +85,13 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodProductsNotNull()
+        public void Products_NotNull()
         {
             Assert.IsNotNull(category.Products);
         }
 
         [TestMethod]
-        public void TestMethodParentCategoriesNotNull()
+        public void ParentCategories_NotNull()
         {
             Assert.IsNotNull(category.ParentCategories);
         }

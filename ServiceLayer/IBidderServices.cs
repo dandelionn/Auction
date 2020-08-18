@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="IPersonService.cs" company="Transilvania University of Brasov">    
+// <copyright file="IBidderService.cs" company="Transilvania University of Brasov">    
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -8,9 +8,9 @@ namespace ServiceLayer
     using DomainModel;
 
     /// <summary>
-    /// Defines the <see cref="IPersonService" />.
+    /// Defines the <see cref="IBidderServices" />.
     /// </summary>
-    interface IPersonService : IService<Person>
+    interface IBidderServices : IService<Bidder>
     {
     }
 }

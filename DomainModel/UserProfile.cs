@@ -17,13 +17,13 @@ namespace DomainModel
 
         public Person Person { get; set; }
 
+        [Required(ErrorMessage = ErrorMessages.UsernameRequired)]
         [RegularExpression(@"^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$", ErrorMessage = ErrorMessages.InvalidUsername)]
-        [StringLength(20)]
         [Index(IsUnique = true)]
         public string Username { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.PasswordRequired)]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", ErrorMessage = ErrorMessages.InvalidPassword)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$", ErrorMessage = ErrorMessages.InvalidPassword)]
         public string Password { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.EmailRequired)]

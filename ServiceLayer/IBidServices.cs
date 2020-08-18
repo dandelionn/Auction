@@ -8,9 +8,9 @@ namespace ServiceLayer
     using DomainModel;
 
     /// <summary>
-    /// Defines the <see cref="IBidService" />.
+    /// Defines the <see cref="IBidServices" />.
     /// </summary>
-    interface IBidService : IService<Bid>
+    interface IBidServices : IService<Bid>
     {
     }
 }

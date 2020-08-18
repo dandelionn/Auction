@@ -25,12 +25,10 @@ namespace DomainModel
 
         [Required(ErrorMessage = ErrorMessages.BeginDateRequired)]
         [DataType(DataType.Date, ErrorMessage = ErrorMessages.InvalidDate)]
-        [BeginDateValidator]
         public DateTime? BeginDate { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.EndDateRequired)]
         [DataType(DataType.Date, ErrorMessage = ErrorMessages.InvalidDate)]
-        [EndDateValidator]
         public DateTime? EndDate { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.CurrencyNameRequired)]

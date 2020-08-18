@@ -32,7 +32,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodNullName()
+        public void Name_Null()
         {
             product.Name = null;
             context.MemberName = nameof(Product.Name);
@@ -45,18 +45,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodValidName()
-        {
-            product.Name = "RandomName";
-            context.MemberName = nameof(Product.Name);
-
-            var result = Validator.TryValidateProperty(product.Name, context, results);
-
-            Assert.AreEqual(0, results.Count);
-        }
-
-        [TestMethod]
-        public void TestMethodNameTooLong()
+        public void Name_TooLong()
         {
             product.Name = new string('a', 51);
             context.MemberName = nameof(Product.Name);
@@ -69,7 +58,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodNameTooShort()
+        public void Name_TooShort()
         {
             product.Name = new string('a', 1);
             context.MemberName = nameof(Product.Name);
@@ -82,7 +71,18 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodCategoriesNull()
+        public void Name_Valid()
+        {
+            product.Name = "RandomName";
+            context.MemberName = nameof(Product.Name);
+
+            var result = Validator.TryValidateProperty(product.Name, context, results);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        [TestMethod]
+        public void Categories_Null()
         {
             product.Categories = null;
             context.MemberName = nameof(Product.Categories);
@@ -95,7 +95,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodCategoriesListEmpty()
+        public void Categories_ListEmpty()
         {
             product.Categories = new List<Category>();
             context.MemberName = nameof(Product.Categories);
@@ -108,7 +108,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodCategoriesValid()
+        public void Categories_Valid()
         {
             product.Categories.Add(new Category());
             context.MemberName = nameof(Product.Categories);
@@ -119,7 +119,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodSellersNull()
+        public void Sellers_Null()
         {
             product.Sellers = null;
             context.MemberName = nameof(Product.Sellers);
@@ -132,7 +132,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodSellersListEmpty()
+        public void Sellers_ListEmpty()
         {
             product.Sellers = new List<Seller>();
             context.MemberName = nameof(Product.Sellers);
@@ -145,7 +145,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodSellersValid()
+        public void Sellers_Valid()
         {
             product.Sellers.Add(new Seller());
             context.MemberName = nameof(Product.Sellers);
@@ -156,7 +156,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodAuctionsNotNull()
+        public void Auctions_NotNull()
         {
             Assert.IsNotNull(product.Auctions);
         }

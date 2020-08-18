@@ -28,13 +28,13 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodAuctionsNotNull()
+        public void Auctions_NotNull()
         {
             Assert.IsNotNull(seller.Auctions);
         }
 
         [TestMethod]
-        public void TestMethodBidsNotNull()
+        public void Products_NotNull()
         {
             Assert.IsNotNull(seller.Products);
         }

@@ -28,7 +28,7 @@ namespace TestDomainModel
         }
 
         [TestMethod]
-        public void TestMethodBidsNotNull()
+        public void Bids_NotNull()
         {
             Assert.IsNotNull(bidder.Bids);
         }

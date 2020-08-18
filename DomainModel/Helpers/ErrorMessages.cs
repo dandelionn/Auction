@@ -345,7 +345,7 @@ namespace DomainModel.Validators
 
         public const string SellersRequired = "Sellers is required";
 
-        public const string AuctionPriceTooSmall = "Current auction price is to small";
+        public const string AuctionStartPriceTooSmall = "Current auction price is to small";
 
         public const string UsernameRequired = "Username is required";
 
@@ -358,5 +358,20 @@ namespace DomainModel.Validators
         public const string InvalidUsername = "Username is not valid";
 
         public const string InvalidPassword = "Password is invalid";
+
+        public const string BidValueBiggerThanMaxBidValue = "Bid value is bigger than the maximum bid value";
+
+        public const string BidValueLessOrEqualThanAuctionCurrentPrice = "Bid value is less or equal than the auction current price";
+
+        public const string BidderOwnsThePreviousBid = "Bidder own the previous bid of the auction";
+
+        public const string ChangesNotAllowedInExpiredAuctions = "Changes are now allowed in finalized auctions";
+
+        public const string TooManyAuctionsStartedAndNotFinalized = "Max auctions number started and not finalized excedeed";
+        public const string TooManyAuctionsStartedAndNotFinalizedForCategory = "Max auctions number for category started and not finalized excedeed";
+
+        public const string SellerIsBanned = "Seller is banned for creating auctions.";
+
+        public const string ValueShouldNotBeZero = "Value should not be zero!";
     }
 }
