@@ -6,13 +6,13 @@
 
 namespace TestDomainModel
 {
-    using DomainModel;
-    using DomainModel.Validators;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Configuration;
+    using DomainModel;
+    using DomainModel.Validators;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// Defines the <see cref="AuctionTests" />.
@@ -20,10 +20,24 @@ namespace TestDomainModel
     [TestClass]
     public class AuctionTests
     {
+        /// <summary>
+        /// Defines the auction.
+        /// </summary>
         private Auction auction;
+
+        /// <summary>
+        /// Defines the context.
+        /// </summary>
         private ValidationContext context;
+
+        /// <summary>
+        /// Defines the results.
+        /// </summary>
         private List<ValidationResult> results;
 
+        /// <summary>
+        /// The TestInit.
+        /// </summary>
         [TestInitialize]
         public void TestInit()
         {
@@ -32,6 +46,9 @@ namespace TestDomainModel
             results = new List<ValidationResult>();
         }
 
+        /// <summary>
+        /// The Name_Null.
+        /// </summary>
         [TestMethod]
         public void Name_Null()
         {
@@ -45,6 +62,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.NameRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Name_Valid.
+        /// </summary>
         [TestMethod]
         public void Name_Valid()
         {
@@ -56,6 +76,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The Name_TooLong.
+        /// </summary>
         [TestMethod]
         public void Name_TooLong()
         {
@@ -69,6 +92,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthBetween2And50, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Name_TooShort.
+        /// </summary>
         [TestMethod]
         public void Name_TooShort()
         {
@@ -82,6 +108,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthBetween2And50, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Address_Null.
+        /// </summary>
         [TestMethod]
         public void Address_Null()
         {
@@ -95,6 +124,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.AddressRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Address_Valid.
+        /// </summary>
         [TestMethod]
         public void Address_Valid()
         {
@@ -106,6 +138,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The Address_TooLong.
+        /// </summary>
         [TestMethod]
         public void Address_TooLong()
         {
@@ -119,6 +154,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthBetween2And100, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Address_TooShort.
+        /// </summary>
         [TestMethod]
         public void Address_TooShort()
         {
@@ -132,6 +170,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthBetween2And100, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The BeginDate_Null.
+        /// </summary>
         [TestMethod]
         public void BeginDate_Null()
         {
@@ -145,6 +186,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.BeginDateRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The BeginDate_Valid.
+        /// </summary>
         [TestMethod]
         public void BeginDate_Valid()
         {
@@ -156,6 +200,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The EndDate_Null.
+        /// </summary>
         [TestMethod]
         public void EndDate_Null()
         {
@@ -169,6 +216,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.EndDateRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The EndDate_Valid.
+        /// </summary>
         [TestMethod]
         public void EndDate_Valid()
         {
@@ -180,6 +230,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The CurrencyName_Null.
+        /// </summary>
         [TestMethod]
         public void CurrencyName_Null()
         {
@@ -193,6 +246,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.CurrencyNameRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The CurrencyName_Valid.
+        /// </summary>
         [TestMethod]
         public void CurrencyName_Valid()
         {
@@ -204,6 +260,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The CurrencyName_Invalid.
+        /// </summary>
         [TestMethod]
         public void CurrencyName_Invalid()
         {
@@ -217,6 +276,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.CurrencyNameIsNotValid, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The BeginPrice_Null.
+        /// </summary>
         [TestMethod]
         public void BeginPrice_Null()
         {
@@ -230,6 +292,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.BeginPriceRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The BeginPrice_Valid.
+        /// </summary>
         [TestMethod]
         public void BeginPrice_Valid()
         {
@@ -242,6 +307,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The BeginPrice_Negative.
+        /// </summary>
         [TestMethod]
         public void BeginPrice_Negative()
         {
@@ -256,6 +324,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.NegativePrice, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The AuctionBeginPrice_TooSmall.
+        /// </summary>
         [TestMethod]
         public void AuctionBeginPrice_TooSmall()
         {
@@ -270,6 +341,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.AuctionStartPriceTooSmall, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The CurrentPrice_Valid.
+        /// </summary>
         [TestMethod]
         public void CurrentPrice_Valid()
         {
@@ -282,6 +356,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The CurrentPrice_Negative.
+        /// </summary>
         [TestMethod]
         public void CurrentPrice_Negative()
         {
@@ -296,6 +373,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.NegativePrice, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The CurrentPrice_TooSmall.
+        /// </summary>
         [TestMethod]
         public void CurrentPrice_TooSmall()
         {
@@ -310,6 +390,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.AuctionStartPriceTooSmall, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The CurrentPrice_Null.
+        /// </summary>
         [TestMethod]
         public void CurrentPrice_Null()
         {
@@ -324,12 +407,18 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.CurrentPriceRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Active_False.
+        /// </summary>
         [TestMethod]
         public void Active_False()
         {
             Assert.IsFalse(auction.Active);
         }
 
+        /// <summary>
+        /// The Products_Null.
+        /// </summary>
         [TestMethod]
         public void Products_Null()
         {
@@ -343,6 +432,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.ProductsRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Products_ListEmpty.
+        /// </summary>
         [TestMethod]
         public void Products_ListEmpty()
         {
@@ -356,6 +448,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthMustBeGreaterThanZero, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Products_Valid.
+        /// </summary>
         [TestMethod]
         public void Products_Valid()
         {
@@ -367,12 +462,18 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The Bids_NotNull.
+        /// </summary>
         [TestMethod]
         public void Bids_NotNull()
         {
             Assert.IsNotNull(auction.Bids);
         }
 
+        /// <summary>
+        /// The Owner_Null.
+        /// </summary>
         [TestMethod]
         public void Owner_Null()
         {
@@ -386,6 +487,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.SellerRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Owner_NotNull.
+        /// </summary>
         [TestMethod]
         public void Owner_NotNull()
         {

@@ -1,11 +1,32 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="Program.cs" company="Transilvania University of Brasov">    
+// Author: Paul Michea  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace Application
+{
+    /// <summary>
+    /// Defines the Program>.
+    /// </summary>
+    internal class Program
+    {
+        /// <summary>
+        /// The Main function.
+        /// </summary>
+        internal static void Main()
+        {
+        }
+    }
+}
+
 // link for configuring log4net
 // https://stackify.com/log4net-guide-dotnet-logging/
 // ColoredConsoleAppender
 // https://stackoverflow.com/questions/36215851/log4net-coloredconsoleappender-not-showing-any-color
 
 /*
- * Enterprise Library
+ * Enterprise DataLayer
 Validation
 Validatoare pentru proprietati
 
@@ -28,16 +49,13 @@ Doar cei din anul 2 folosesc ifuri
  * dotCover:
  * OpenCover: https://www.nuget.org/packages/OpenCover/
  * AxoCover: https://github.com/axodox/AxoCover
- * 
- * 
- * Sasu:
+ * Lucian Sasu:
 
 -link to object, link to entity framework
 -cream baza de date porning de la clase
 -Entity framework lazy loading by using virtual keyword
 -facem adnotarile corect pe clase si se genereaza o baza de date ca la carte
 
- 
 -get insert update delete pt partea de repository
 -cheie primara object
 -orderBy cand se aduc datele neaparat
@@ -57,12 +75,10 @@ folosim ceea ce vrem noi.
 
 Fara mocking vei prezenta degeaba
 Tot ce e cu rosu e obligatoriu, altfel nu venim
-UI nu e necesar, vrea doar de la ServiceLayer
+UI nu e necesar, e important ServiceLayerul
 Toata testarea se face in mod automat.
-Ne apucam de lucru.
 
 Folosim REPOSITORY PATTERN pt ca accelereaza mult scrierea de cod.
-Sunt putini studenti care folosesc acest pattern(Sasu nu stie de ce)
 
 clase generice, interfete generice
 
@@ -73,32 +89,3 @@ LOGING IN BAZA DE DATE(BONUS POINTS)
 NCOVER(licenta de student) + NUNIT
 .NET Framework
  */
-
-using DataMapper.SqlServerDAO;
-using DomainModel;
-using ServiceLayer.ServiceImplementation;
-using System;
-
-namespace Application
-{
-    class Program
-    {
-        static void Main()
-        {
-            var userProfile = new UserProfile
-            {
-                Username = "dandelionn",
-                Password = "Password0&",
-                Email = "dan@email.com",
-            };
-
-            var userProfileServices = new UserProfileServices(new UserProfileRepository());
-            userProfileServices.Insert(userProfile);
-            var list = userProfileServices.GetAll();
-            foreach(var item in list)
-            {
-                Console.WriteLine(item.Id.ToString(), item.Username);
-            }
-        }
-    }
-}

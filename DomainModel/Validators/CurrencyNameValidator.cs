@@ -9,7 +9,6 @@ namespace DomainModel.Validators
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Configuration;
     using System.Globalization;
     using System.Linq;
 
@@ -49,6 +48,7 @@ namespace DomainModel.Validators
             {
                 return new ValidationResult(ErrorMessages.CurrencyNameIsNotValid);
             }
+
             return ValidationResult.Success;
         }
     }

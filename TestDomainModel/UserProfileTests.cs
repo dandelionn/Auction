@@ -3,23 +3,39 @@
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-using DomainModel;
-using DomainModel.Validators;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace TestDomainModel
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using DomainModel;
+    using DomainModel.Validators;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    /// <summary>
+    /// Defines the <see cref="UserProfileTests" />.
+    /// </summary>
     [TestClass]
     public class UserProfileTests
     {
+        /// <summary>
+        /// Defines the userProfile.
+        /// </summary>
         private UserProfile userProfile;
 
+        /// <summary>
+        /// Defines the context.
+        /// </summary>
         private ValidationContext context;
 
+        /// <summary>
+        /// Defines the results.
+        /// </summary>
         private List<ValidationResult> results;
 
+        /// <summary>
+        /// The TestInit.
+        /// </summary>
         [TestInitialize]
         public void TestInit()
         {
@@ -28,6 +44,9 @@ namespace TestDomainModel
             results = new List<ValidationResult>();
         }
 
+        /// <summary>
+        /// The Email_Null.
+        /// </summary>
         [TestMethod]
         public void Email_Null()
         {
@@ -40,6 +59,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.EmailRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Email_Valid.
+        /// </summary>
         [TestMethod]
         public void Email_Valid()
         {
@@ -51,6 +73,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The Email_Invalid.
+        /// </summary>
         [TestMethod]
         public void Email_Invalid()
         {
@@ -64,6 +89,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidEmailAddress, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Username_Null.
+        /// </summary>
         [TestMethod]
         public void Username_Null()
         {
@@ -77,6 +105,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.UsernameRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Username_TooLong.
+        /// </summary>
         [TestMethod]
         public void Username_TooLong()
         {
@@ -90,6 +121,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Username_TooShort.
+        /// </summary>
         [TestMethod]
         public void Username_TooShort()
         {
@@ -103,6 +137,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Username_PointAtBegin.
+        /// </summary>
         [TestMethod]
         public void Username_PointAtBegin()
         {
@@ -116,6 +153,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Username_UnderlineAtBegin.
+        /// </summary>
         [TestMethod]
         public void Username_UnderlineAtBegin()
         {
@@ -129,6 +169,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Username_PointUnderlineInside.
+        /// </summary>
         [TestMethod]
         public void Username_PointUnderlineInside()
         {
@@ -142,6 +185,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Username_UnderlinePointInside.
+        /// </summary>
         [TestMethod]
         public void Username_UnderlinePointInside()
         {
@@ -155,6 +201,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Username_MultipleUnderlineInside.
+        /// </summary>
         [TestMethod]
         public void Username_MultipleUnderlineInside()
         {
@@ -168,6 +217,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Username_MultiplePointInside.
+        /// </summary>
         [TestMethod]
         public void Username_MultiplePointInside()
         {
@@ -181,6 +233,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Username_ForbiddenCharacter.
+        /// </summary>
         [TestMethod]
         public void Username_ForbiddenCharacter()
         {
@@ -194,6 +249,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Username_PointAtEnd.
+        /// </summary>
         [TestMethod]
         public void Username_PointAtEnd()
         {
@@ -207,6 +265,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Username_UnderlineAtEnd.
+        /// </summary>
         [TestMethod]
         public void Username_UnderlineAtEnd()
         {
@@ -220,6 +281,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidUsername, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Username_Valid.
+        /// </summary>
         [TestMethod]
         public void Username_Valid()
         {
@@ -231,6 +295,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The Password_TooLong.
+        /// </summary>
         [TestMethod]
         public void Password_TooLong()
         {
@@ -244,6 +311,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidPassword, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Password_TooShort.
+        /// </summary>
         [TestMethod]
         public void Password_TooShort()
         {
@@ -257,6 +327,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidPassword, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Password_NoUppercaseLetter.
+        /// </summary>
         [TestMethod]
         public void Password_NoUppercaseLetter()
         {
@@ -270,6 +343,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidPassword, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Password_NoLowercaseLetter.
+        /// </summary>
         [TestMethod]
         public void Password_NoLowercaseLetter()
         {
@@ -283,6 +359,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidPassword, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Password_NoNumber.
+        /// </summary>
         [TestMethod]
         public void Password_NoNumber()
         {
@@ -296,6 +375,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidPassword, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Password_NoSpecialCharacter.
+        /// </summary>
         [TestMethod]
         public void Password_NoSpecialCharacter()
         {
@@ -309,6 +391,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidPassword, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Password_Valid.
+        /// </summary>
         [TestMethod]
         public void Password_Valid()
         {
@@ -320,6 +405,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The Password_Null.
+        /// </summary>
         [TestMethod]
         public void Password_Null()
         {

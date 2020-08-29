@@ -3,21 +3,22 @@
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
 namespace DomainModel.Validators
 {
     using System.Collections;
     using System.ComponentModel.DataAnnotations;
 
     /// <summary>
-    /// Defines the .<see cref="MustHaveOneElementAttribute" />
+    /// Defines the .<see cref="MustHaveOneElementAttribute" />.
     /// </summary>
     public sealed class MustHaveOneElementAttribute : ValidationAttribute
     {
         /// <summary>
         /// The IsValid.
         /// </summary>
-        /// <param name="value">The value.<see cref="object"/></param>
-        /// <returns>The .<see cref="bool"/></returns>
+        /// <param name="value">The value.<see cref="object"/>.</param>
+        /// <returns>The .<see cref="bool"/>.</returns>
         public override bool IsValid(object value)
         {
             var list = (IList)value;

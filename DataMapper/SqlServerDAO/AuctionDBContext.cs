@@ -3,7 +3,12 @@
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Library.DataMapper
+
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("TestDatabase")]
+
+namespace DataLayer.AccessLayer
 {
     using System.Data.Entity;
     using DomainModel;
@@ -16,7 +21,7 @@ namespace Library.DataMapper
         /// <summary>
         /// Initializes a new instance of the <see cref="AuctionDBContext"/> class.
         /// </summary>
-        public AuctionDBContext() : base("myConStr")
+        public AuctionDBContext() : base("AuctionDBConnection")
         {
         }
 
@@ -26,17 +31,17 @@ namespace Library.DataMapper
         public virtual DbSet<Auction> Auctions { get; set; }
 
         /// <summary>
-        /// Gets or sets the Person.
+        /// Gets or sets the People.
         /// </summary>
         public virtual DbSet<Person> People { get; set; }
 
         /// <summary>
-        /// Gets or sets the Category.
+        /// Gets or sets the Categories.
         /// </summary>
         public virtual DbSet<Category> Categories { get; set; }
 
         /// <summary>
-        /// Gets or sets the Product.
+        /// Gets or sets the Products.
         /// </summary>
         public virtual DbSet<Product> Products { get; set; }
 
@@ -45,10 +50,19 @@ namespace Library.DataMapper
         /// </summary>
         public virtual DbSet<Bid> Bids { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Bidders.
+        /// </summary>
         public virtual DbSet<Bidder> Bidders { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Sellers.
+        /// </summary>
         public virtual DbSet<Seller> Sellers { get; set; }
 
+        /// <summary>
+        /// Gets or sets the UserProfiles.
+        /// </summary>
         public virtual DbSet<UserProfile> UserProfiles { get; set; }
     }
 }

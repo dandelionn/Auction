@@ -77,7 +77,7 @@ namespace DomainModel.Validators
         public const string AuctionRequired = "Auction is required";
 
         /// <summary>
-        /// Defines the PriceRequired.
+        /// Defines the BeginPriceRequired.
         /// </summary>
         public const string BeginPriceRequired = "Price is required";
 
@@ -122,7 +122,7 @@ namespace DomainModel.Validators
         public const string TypeRequired = "Type is required";
 
         /// <summary>
-        /// Defines the LengthGreaterThanZero.
+        /// Defines the LengthMustBeGreaterThanZero.
         /// </summary>
         public const string LengthMustBeGreaterThanZero = "The length must be greater than 0";
 
@@ -142,7 +142,7 @@ namespace DomainModel.Validators
         public const string LoanDateRequired = "Loan date is required";
 
         /// <summary>
-        /// Defines the DateNotValid.
+        /// Defines the InvalidDate.
         /// </summary>
         public const string InvalidDate = "Date is not valid";
 
@@ -162,7 +162,7 @@ namespace DomainModel.Validators
         public const string ReaderRequired = "Reader is required";
 
         /// <summary>
-        /// Defines the NotAValidPhoneNumber.
+        /// Defines the InvalidPhoneNumber.
         /// </summary>
         public const string InvalidPhoneNumber = "Not a valid phone number";
 
@@ -172,7 +172,7 @@ namespace DomainModel.Validators
         public const string LengthBetween2And100 = "The length must be between 2 and 100";
 
         /// <summary>
-        /// Defines the NotAValidEmailAddress.
+        /// Defines the InvalidEmailAddress.
         /// </summary>
         public const string InvalidEmailAddress = "Not a valid email address";
 
@@ -327,51 +327,118 @@ namespace DomainModel.Validators
         public const string BeginDateShouldNotBeInThePast = "BeginDate should not be in the past";
 
         /// <summary>
-        /// Defines the CurrencyTypeRequired.
+        /// Defines the CurrencyNameRequired.
         /// </summary>
         public const string CurrencyNameRequired = "CurrencyType is required";
 
+        /// <summary>
+        /// Defines the CurrencyNameIsNotValid.
+        /// </summary>
         public const string CurrencyNameIsNotValid = "Currency name is not valid";
 
+        /// <summary>
+        /// Defines the TooSmallAuctionBeginPrice.
+        /// </summary>
         public const string TooSmallAuctionBeginPrice = "The auction begin price is too small";
 
+        /// <summary>
+        /// Defines the CurrentPriceRequired.
+        /// </summary>
         public const string CurrentPriceRequired = "CurrentPrice is required";
 
+        /// <summary>
+        /// Defines the OwnedAuctionsRequired.
+        /// </summary>
         public const string OwnedAuctionsRequired = "OwnedAuctions is required";
 
+        /// <summary>
+        /// Defines the SellerRequired.
+        /// </summary>
         public const string SellerRequired = "Seller is required";
 
+        /// <summary>
+        /// Defines the BidderRequired.
+        /// </summary>
         public const string BidderRequired = "Bidder is required";
 
+        /// <summary>
+        /// Defines the SellersRequired.
+        /// </summary>
         public const string SellersRequired = "Sellers is required";
 
+        /// <summary>
+        /// Defines the AuctionStartPriceTooSmall.
+        /// </summary>
         public const string AuctionStartPriceTooSmall = "Current auction price is to small";
 
+        /// <summary>
+        /// Defines the UsernameRequired.
+        /// </summary>
         public const string UsernameRequired = "Username is required";
 
+        /// <summary>
+        /// Defines the PasswordRequired.
+        /// </summary>
         public const string PasswordRequired = "Password is required";
 
+        /// <summary>
+        /// Defines the EmailRequired.
+        /// </summary>
         public const string EmailRequired = "Email is required";
 
+        /// <summary>
+        /// Defines the PhoneNumberRequired.
+        /// </summary>
         public const string PhoneNumberRequired = "Phone number is required";
 
+        /// <summary>
+        /// Defines the InvalidUsername.
+        /// </summary>
         public const string InvalidUsername = "Username is not valid";
 
+        /// <summary>
+        /// Defines the InvalidPassword.
+        /// </summary>
         public const string InvalidPassword = "Password is invalid";
 
+        /// <summary>
+        /// Defines the BidValueBiggerThanMaxBidValue.
+        /// </summary>
         public const string BidValueBiggerThanMaxBidValue = "Bid value is bigger than the maximum bid value";
 
+        /// <summary>
+        /// Defines the BidValueLessOrEqualThanAuctionCurrentPrice.
+        /// </summary>
         public const string BidValueLessOrEqualThanAuctionCurrentPrice = "Bid value is less or equal than the auction current price";
 
+        /// <summary>
+        /// Defines the BidderOwnsThePreviousBid.
+        /// </summary>
         public const string BidderOwnsThePreviousBid = "Bidder own the previous bid of the auction";
 
+        /// <summary>
+        /// Defines the ChangesNotAllowedInExpiredAuctions.
+        /// </summary>
         public const string ChangesNotAllowedInExpiredAuctions = "Changes are now allowed in finalized auctions";
 
+        /// <summary>
+        /// Defines the TooManyAuctionsStartedAndNotFinalized.
+        /// </summary>
         public const string TooManyAuctionsStartedAndNotFinalized = "Max auctions number started and not finalized excedeed";
+
+        /// <summary>
+        /// Defines the TooManyAuctionsStartedAndNotFinalizedForCategory.
+        /// </summary>
         public const string TooManyAuctionsStartedAndNotFinalizedForCategory = "Max auctions number for category started and not finalized excedeed";
 
+        /// <summary>
+        /// Defines the SellerIsBanned.
+        /// </summary>
         public const string SellerIsBanned = "Seller is banned for creating auctions.";
 
+        /// <summary>
+        /// Defines the ValueShouldNotBeZero.
+        /// </summary>
         public const string ValueShouldNotBeZero = "Value should not be zero!";
     }
 }

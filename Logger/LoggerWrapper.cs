@@ -1,12 +1,18 @@
-﻿namespace Library
+﻿//-----------------------------------------------------------------------
+// <copyright file="LoggerWrapper.cs" company="Transilvania University of Brasov">    
+// Author: Paul Michea  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace DataLayer
 {
-    using log4net;
     using System;
+    using log4net;
 
     /// <summary>
-    /// Defines the .<see cref="LoggerWrapper" />
+    /// Defines the .<see cref="Log4NetWrapper" />.
     /// </summary>
-    public class LoggerWrapper
+    public class Log4NetWrapper
     {
         /// <summary>
         /// Defines the logger.
@@ -14,45 +20,45 @@
         private readonly ILog logger;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LoggerWrapper"/> class.
+        /// Initializes a new instance of the <see cref="Log4NetWrapper"/> class.
         /// </summary>
-        /// <param name="type">The type.<see cref="Type"/></param>
-        public LoggerWrapper(Type type)
+        /// <param name="type">The type.<see cref="Type"/>.</param>
+        public Log4NetWrapper(Type type)
         {
             this.logger = LogManager.GetLogger(type);
         }
 
         /// <summary>
-        /// The Info.
+        /// Function for logging a message.
         /// </summary>
-        /// <param name="Message">The Message.<see cref="object"/></param>
-        public void Info(object Message)
+        /// <param name="message">The Message.<see cref="object"/>.</param>
+        public void Info(object message)
         {
             if (this.logger.IsInfoEnabled)
             {
-                this.logger.Info(Message);
+                this.logger.Info(message);
             }
         }
 
         /// <summary>
-        /// The Info.
+        /// Function for logging Info.
         /// </summary>
-        /// <param name="Message">The Message.<see cref="object"/></param>
-        /// <param name="exception">The exception.<see cref="Exception"/></param>
-        public void Info(object Message, Exception exception)
+        /// <param name="message">The Message.<see cref="object"/>.</param>
+        /// <param name="exception">The exception.<see cref="Exception"/>.</param>
+        public void Info(object message, Exception exception)
         {
             if (this.logger.IsInfoEnabled)
             {
-                this.logger.Info(Message, exception);
+                this.logger.Info(message, exception);
             }
         }
 
         /// <summary>
         /// The InfoFormat.
         /// </summary>
-        /// <param name="provider">The provider.<see cref="IFormatProvider"/></param>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="args">The args.<see cref="object[]"/></param>
+        /// <param name="provider">The provider.<see cref="IFormatProvider"/>.</param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="args">The args.<see cref="object[]"/>.</param>
         public void InfoFormat(IFormatProvider provider, string format, params object[] args)
         {
             if (this.logger.IsInfoEnabled)
@@ -64,10 +70,10 @@
         /// <summary>
         /// The InfoFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="arg0">The arg0.<see cref="object"/></param>
-        /// <param name="arg1">The arg1.<see cref="object"/></param>
-        /// <param name="arg2">The arg2.<see cref="object"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="arg0">The arg0.<see cref="object"/>.</param>
+        /// <param name="arg1">The arg1.<see cref="object"/>.</param>
+        /// <param name="arg2">The arg2.<see cref="object"/>.</param>
         public void InfoFormat(string format, object arg0, object arg1, object arg2)
         {
             if (this.logger.IsInfoEnabled)
@@ -79,9 +85,9 @@
         /// <summary>
         /// The InfoFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="arg0">The arg0.<see cref="object"/></param>
-        /// <param name="arg1">The arg1.<see cref="object"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="arg0">The arg0.<see cref="object"/>.</param>
+        /// <param name="arg1">The arg1.<see cref="object"/>.</param>
         public void InfoFormat(string format, object arg0, object arg1)
         {
             if (this.logger.IsInfoEnabled)
@@ -93,8 +99,8 @@
         /// <summary>
         /// The InfoFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="arg0">The arg0.<see cref="object"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="arg0">The arg0.<see cref="object"/>.</param>
         public void InfoFormat(string format, object arg0)
         {
             if (this.logger.IsInfoEnabled)
@@ -106,8 +112,8 @@
         /// <summary>
         /// The InfoFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="args">The args.<see cref="object[]"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="args">The args.<see cref="object[]"/>.</param>
         public void InfoFormat(string format, params object[] args)
         {
             if (this.logger.IsInfoEnabled)
@@ -119,34 +125,34 @@
         /// <summary>
         /// The Debug.
         /// </summary>
-        /// <param name="Message">The Message.<see cref="object"/></param>
-        public void Debug(object Message)
+        /// <param name="message">The Message.<see cref="object"/>.</param>
+        public void Debug(object message)
         {
             if (this.logger.IsDebugEnabled)
             {
-                this.logger.Debug(Message);
+                this.logger.Debug(message);
             }
         }
 
         /// <summary>
         /// The Debug.
         /// </summary>
-        /// <param name="Message">The Message.<see cref="object"/></param>
-        /// <param name="exception">The exception.<see cref="Exception"/></param>
-        public void Debug(object Message, Exception exception)
+        /// <param name="message">The Message.<see cref="object"/>.</param>
+        /// <param name="exception">The exception.<see cref="Exception"/>.</param>
+        public void Debug(object message, Exception exception)
         {
             if (this.logger.IsDebugEnabled)
             {
-                this.logger.Debug(Message, exception);
+                this.logger.Debug(message, exception);
             }
         }
 
         /// <summary>
         /// The DebugFormat.
         /// </summary>
-        /// <param name="provider">The provider.<see cref="IFormatProvider"/></param>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="args">The args.<see cref="object[]"/></param>
+        /// <param name="provider">The provider.<see cref="IFormatProvider"/>.</param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="args">The args.<see cref="object[]"/>.</param>
         public void DebugFormat(IFormatProvider provider, string format, params object[] args)
         {
             if (this.logger.IsDebugEnabled)
@@ -158,10 +164,10 @@
         /// <summary>
         /// The DebugFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="arg0">The arg0.<see cref="object"/></param>
-        /// <param name="arg1">The arg1.<see cref="object"/></param>
-        /// <param name="arg2">The arg2.<see cref="object"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="arg0">The arg0.<see cref="object"/>.</param>
+        /// <param name="arg1">The arg1.<see cref="object"/>.</param>
+        /// <param name="arg2">The arg2.<see cref="object"/>.</param>
         public void DebugFormat(string format, object arg0, object arg1, object arg2)
         {
             if (this.logger.IsDebugEnabled)
@@ -173,9 +179,9 @@
         /// <summary>
         /// The DebugFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="arg0">The arg0.<see cref="object"/></param>
-        /// <param name="arg1">The arg1.<see cref="object"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="arg0">The arg0.<see cref="object"/>.</param>
+        /// <param name="arg1">The arg1.<see cref="object"/>.</param>
         public void DebugFormat(string format, object arg0, object arg1)
         {
             if (this.logger.IsDebugEnabled)
@@ -187,8 +193,8 @@
         /// <summary>
         /// The DebugFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="arg0">The arg0.<see cref="object"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="arg0">The arg0.<see cref="object"/>.</param>
         public void DebugFormat(string format, object arg0)
         {
             if (this.logger.IsDebugEnabled)
@@ -200,8 +206,8 @@
         /// <summary>
         /// The DebugFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="args">The args.<see cref="object[]"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="args">The args.<see cref="object[]"/>.</param>
         public void DebugFormat(string format, params object[] args)
         {
             if (this.logger.IsDebugEnabled)
@@ -211,36 +217,36 @@
         }
 
         /// <summary>
-        /// The Warn.
+        /// Function for logging a warning message.
         /// </summary>
-        /// <param name="Message">The Message.<see cref="object"/></param>
-        public void Warn(object Message)
+        /// <param name="message">The Message.<see cref="object"/>.</param>
+        public void Warn(object message)
         {
             if (this.logger.IsWarnEnabled)
             {
-                this.logger.Warn(Message);
+                this.logger.Warn(message);
             }
         }
 
         /// <summary>
-        /// The Warn.
+        /// Function for logging a warning message with an exception.
         /// </summary>
-        /// <param name="Message">The Message.<see cref="object"/></param>
-        /// <param name="exception">The exception.<see cref="Exception"/></param>
-        public void Warn(object Message, Exception exception)
+        /// <param name="message">The Message.<see cref="object"/>.</param>
+        /// <param name="exception">The exception.<see cref="Exception"/>.</param>
+        public void Warn(object message, Exception exception)
         {
             if (this.logger.IsWarnEnabled)
             {
-                this.logger.Warn(Message, exception);
+                this.logger.Warn(message, exception);
             }
         }
 
         /// <summary>
         /// The WarnFormat.
         /// </summary>
-        /// <param name="provider">The provider.<see cref="IFormatProvider"/></param>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="args">The args.<see cref="object[]"/></param>
+        /// <param name="provider">The provider.<see cref="IFormatProvider"/>.</param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="args">The args.<see cref="object[]"/>.</param>
         public void WarnFormat(IFormatProvider provider, string format, params object[] args)
         {
             if (this.logger.IsWarnEnabled)
@@ -252,10 +258,10 @@
         /// <summary>
         /// The WarnFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="arg0">The arg0.<see cref="object"/></param>
-        /// <param name="arg1">The arg1.<see cref="object"/></param>
-        /// <param name="arg2">The arg2.<see cref="object"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="arg0">The arg0.<see cref="object"/>.</param>
+        /// <param name="arg1">The arg1.<see cref="object"/>.</param>
+        /// <param name="arg2">The arg2.<see cref="object"/>.</param>
         public void WarnFormat(string format, object arg0, object arg1, object arg2)
         {
             if (this.logger.IsWarnEnabled)
@@ -267,9 +273,9 @@
         /// <summary>
         /// The WarnFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="arg0">The arg0.<see cref="object"/></param>
-        /// <param name="arg1">The arg1.<see cref="object"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="arg0">The arg0.<see cref="object"/>.</param>
+        /// <param name="arg1">The arg1.<see cref="object"/>.</param>
         public void WarnFormat(string format, object arg0, object arg1)
         {
             if (this.logger.IsWarnEnabled)
@@ -281,8 +287,8 @@
         /// <summary>
         /// The WarnFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="arg0">The arg0.<see cref="object"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="arg0">The arg0.<see cref="object"/>.</param>
         public void WarnFormat(string format, object arg0)
         {
             if (this.logger.IsWarnEnabled)
@@ -294,8 +300,8 @@
         /// <summary>
         /// The WarnFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="args">The args.<see cref="object[]"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="args">The args.<see cref="object[]"/>.</param>
         public void WarnFormat(string format, params object[] args)
         {
             if (this.logger.IsWarnEnabled)
@@ -307,34 +313,34 @@
         /// <summary>
         /// The Error.
         /// </summary>
-        /// <param name="Message">The Message.<see cref="object"/></param>
-        public void Error(object Message)
+        /// <param name="message">The Message.<see cref="object"/>.</param>
+        public void Error(object message)
         {
             if (this.logger.IsErrorEnabled)
             {
-                this.logger.Error(Message);
+                this.logger.Error(message);
             }
         }
 
         /// <summary>
         /// The Error.
         /// </summary>
-        /// <param name="Message">The Message.<see cref="object"/></param>
-        /// <param name="exception">The exception.<see cref="Exception"/></param>
-        public void Error(object Message, Exception exception)
+        /// <param name="message">The Message.<see cref="object"/>.</param>
+        /// <param name="exception">The exception.<see cref="Exception"/>.</param>
+        public void Error(object message, Exception exception)
         {
             if (this.logger.IsErrorEnabled)
             {
-                this.logger.Error(Message, exception);
+                this.logger.Error(message, exception);
             }
         }
 
         /// <summary>
         /// The ErrorFormat.
         /// </summary>
-        /// <param name="provider">The provider.<see cref="IFormatProvider"/></param>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="args">The args.<see cref="object[]"/></param>
+        /// <param name="provider">The provider.<see cref="IFormatProvider"/>.</param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="args">The args.<see cref="object[]"/>.</param>
         public void ErrorFormat(IFormatProvider provider, string format, params object[] args)
         {
             if (this.logger.IsErrorEnabled)
@@ -346,10 +352,10 @@
         /// <summary>
         /// The ErrorFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="arg0">The arg0.<see cref="object"/></param>
-        /// <param name="arg1">The arg1.<see cref="object"/></param>
-        /// <param name="arg2">The arg2.<see cref="object"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="arg0">The arg0.<see cref="object"/>.</param>
+        /// <param name="arg1">The arg1.<see cref="object"/>.</param>
+        /// <param name="arg2">The arg2.<see cref="object"/>.</param>
         public void ErrorFormat(string format, object arg0, object arg1, object arg2)
         {
             if (this.logger.IsErrorEnabled)
@@ -361,9 +367,9 @@
         /// <summary>
         /// The ErrorFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="arg0">The arg0.<see cref="object"/></param>
-        /// <param name="arg1">The arg1.<see cref="object"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="arg0">The arg0.<see cref="object"/>.</param>
+        /// <param name="arg1">The arg1.<see cref="object"/>.</param>
         public void ErrorFormat(string format, object arg0, object arg1)
         {
             if (this.logger.IsErrorEnabled)
@@ -375,8 +381,8 @@
         /// <summary>
         /// The ErrorFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="arg0">The arg0.<see cref="object"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="arg0">The arg0.<see cref="object"/>.</param>
         public void ErrorFormat(string format, object arg0)
         {
             if (this.logger.IsErrorEnabled)
@@ -388,8 +394,8 @@
         /// <summary>
         /// The ErrorFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="args">The args.<see cref="object[]"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="args">The args.<see cref="object[]"/>.</param>
         public void ErrorFormat(string format, params object[] args)
         {
             if (this.logger.IsErrorEnabled)
@@ -401,34 +407,34 @@
         /// <summary>
         /// The Fatal.
         /// </summary>
-        /// <param name="Message">The Message.<see cref="object"/></param>
-        public void Fatal(object Message)
+        /// <param name="message">The Message.<see cref="object"/>.</param>
+        public void Fatal(object message)
         {
             if (this.logger.IsFatalEnabled)
             {
-                this.logger.Fatal(Message);
+                this.logger.Fatal(message);
             }
         }
 
         /// <summary>
         /// The Fatal.
         /// </summary>
-        /// <param name="Message">The Message.<see cref="object"/></param>
-        /// <param name="exception">The exception.<see cref="Exception"/></param>
-        public void Fatal(object Message, Exception exception)
+        /// <param name="message">The Message.<see cref="object"/>.</param>
+        /// <param name="exception">The exception.<see cref="Exception"/>.</param>
+        public void Fatal(object message, Exception exception)
         {
             if (this.logger.IsFatalEnabled)
             {
-                this.logger.Fatal(Message, exception);
+                this.logger.Fatal(message, exception);
             }
         }
 
         /// <summary>
         /// The FatalFormat.
         /// </summary>
-        /// <param name="provider">The provider.<see cref="IFormatProvider"/></param>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="args">The args.<see cref="object[]"/></param>
+        /// <param name="provider">The provider.<see cref="IFormatProvider"/>.</param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="args">The args.<see cref="object[]"/>.</param>
         public void FatalFormat(IFormatProvider provider, string format, params object[] args)
         {
             if (this.logger.IsFatalEnabled)
@@ -440,10 +446,10 @@
         /// <summary>
         /// The FatalFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="arg0">The arg0.<see cref="object"/></param>
-        /// <param name="arg1">The arg1.<see cref="object"/></param>
-        /// <param name="arg2">The arg2.<see cref="object"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="arg0">The arg0.<see cref="object"/>.</param>
+        /// <param name="arg1">The arg1.<see cref="object"/>.</param>
+        /// <param name="arg2">The arg2.<see cref="object"/>.</param>
         public void FatalFormat(string format, object arg0, object arg1, object arg2)
         {
             if (this.logger.IsFatalEnabled)
@@ -455,9 +461,9 @@
         /// <summary>
         /// The FatalFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="arg0">The arg0.<see cref="object"/></param>
-        /// <param name="arg1">The arg1.<see cref="object"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="arg0">The arg0.<see cref="object"/>.</param>
+        /// <param name="arg1">The arg1.<see cref="object"/>.</param>
         public void FatalFormat(string format, object arg0, object arg1)
         {
             if (this.logger.IsFatalEnabled)
@@ -469,8 +475,8 @@
         /// <summary>
         /// The FatalFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="arg0">The arg0.<see cref="object"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="arg0">The arg0.<see cref="object"/>.</param>
         public void FatalFormat(string format, object arg0)
         {
             if (this.logger.IsFatalEnabled)
@@ -482,8 +488,8 @@
         /// <summary>
         /// The FatalFormat.
         /// </summary>
-        /// <param name="format">The format.<see cref="string"/></param>
-        /// <param name="args">The args.<see cref="object[]"/></param>
+        /// <param name="format">The format.<see cref="string"/>.</param>
+        /// <param name="args">The args.<see cref="object[]"/>.</param>
         public void FatalFormat(string format, params object[] args)
         {
             if (this.logger.IsFatalEnabled)

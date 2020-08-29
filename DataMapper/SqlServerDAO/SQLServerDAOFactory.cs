@@ -3,6 +3,7 @@
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
 namespace DataMapper.SqlServerDAO
 {
     /// <summary>

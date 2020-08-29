@@ -60,9 +60,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataMapper\DataMapper.csproj">
+    <ProjectReference Include="..\DataMapper\AccessLayer.csproj">
       <Project>{87447037-DA23-4336-B05A-2489E02990EB}</Project>
-      <Name>DataMapper</Name>
+      <Name>AccessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
       <Project>{2cfd2843-2e02-4165-8d08-adb447ca6440}</Project>

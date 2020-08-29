@@ -3,6 +3,7 @@
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
 namespace DataMapper.SqlServerDAO
 {
     using System;
@@ -10,7 +11,7 @@ namespace DataMapper.SqlServerDAO
     using System.Data.Entity;
     using System.Linq;
     using System.Linq.Expressions;
-    using Library.DataMapper;
+    using DataLayer.AccessLayer;
 
     /// <summary>
     /// Defines the <see cref="BaseRepository{T}" />.
@@ -20,12 +21,12 @@ namespace DataMapper.SqlServerDAO
         where T : class
     {
         /// <summary>
-        /// The Get.
+        /// Applies a filter and a query and returns the resulting list of items.
         /// </summary>
         /// <param name="filter">The filter<see cref="Expression{Func{T, bool}}"/>.</param>
         /// <param name="orderBy">The orderBy<see cref="Func{IQueryable{T}, IOrderedQueryable{T}}"/>.</param>
         /// <param name="includeProperties">The includeProperties<see cref="string"/>.</param>
-        /// <returns>The <see cref="IEnumerable{T}"/>.</returns>
+        /// <returns>The result of the query.</returns>
         public virtual IEnumerable<T> Get(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
@@ -120,10 +121,10 @@ namespace DataMapper.SqlServerDAO
         }
 
         /// <summary>
-        /// The GetByID.
+        /// Retrieves the entity identified by the id.
         /// </summary>
         /// <param name="id">The id<see cref="object"/>.</param>
-        /// <returns>The <see cref="T"/>.</returns>
+        /// <returns>The object identified by the id.</returns>
         public virtual T GetByID(object id)
         {
             using (var ctx = new AuctionDBContext())

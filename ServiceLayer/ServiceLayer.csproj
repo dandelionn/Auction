@@ -47,34 +47,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAuctionServices.cs" />
-    <Compile Include="IBidderServices.cs" />
-    <Compile Include="IBidServices.cs" />
-    <Compile Include="ICategoryServices.cs" />
-    <Compile Include="IPersonServices.cs" />
-    <Compile Include="IProductServices.cs" />
-    <Compile Include="ISellerServices.cs" />
-    <Compile Include="IServices.cs" />
+    <Compile Include="IAuctionService.cs" />
+    <Compile Include="IBidderService.cs" />
+    <Compile Include="IBidService.cs" />
+    <Compile Include="ICategoryService.cs" />
+    <Compile Include="IPersonService.cs" />
+    <Compile Include="IProductService.cs" />
+    <Compile Include="ISellerService.cs" />
+    <Compile Include="IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceImplementation\AuctionServices.cs" />
-    <Compile Include="ServiceImplementation\BidderServices.cs" />
-    <Compile Include="ServiceImplementation\BidServices.cs" />
-    <Compile Include="ServiceImplementation\CategoryServices.cs" />
+    <Compile Include="ServiceImplementation\AuctionService.cs" />
+    <Compile Include="ServiceImplementation\BidderService.cs" />
+    <Compile Include="ServiceImplementation\BidService.cs" />
+    <Compile Include="ServiceImplementation\CategoryService.cs" />
     <Compile Include="Helpers\EntityValidator.cs" />
-    <Compile Include="ServiceImplementation\SellerServices.cs" />
-    <Compile Include="ServiceImplementation\PersonServices.cs" />
-    <Compile Include="ServiceImplementation\ProductServices.cs" />
-    <Compile Include="ServiceImplementation\UserProfileServices.cs" />
-    <Compile Include="IUserProfileServices.cs" />
+    <Compile Include="ServiceImplementation\SellerService.cs" />
+    <Compile Include="ServiceImplementation\PersonService.cs" />
+    <Compile Include="ServiceImplementation\ProductService.cs" />
+    <Compile Include="ServiceImplementation\UserProfileService.cs" />
+    <Compile Include="IUserProfileService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataMapper\DataMapper.csproj">
+    <ProjectReference Include="..\DataMapper\AccessLayer.csproj">
       <Project>{87447037-da23-4336-b05a-2489e02990eb}</Project>
-      <Name>DataMapper</Name>
+      <Name>AccessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
       <Project>{2cfd2843-2e02-4165-8d08-adb447ca6440}</Project>
       <Name>DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logger\Logger.csproj">
+      <Project>{0960DD1F-39B2-4B82-A4DC-166DEAAFB79D}</Project>
+      <Name>Logger</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

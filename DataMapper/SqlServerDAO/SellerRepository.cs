@@ -3,6 +3,7 @@
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
 namespace DataMapper.SqlServerDAO
 {
     using DomainModel;
@@ -12,6 +13,5 @@ namespace DataMapper.SqlServerDAO
     /// </summary>
     public class SellerRepository : BaseRepository<Seller>, ISellerRepository
     {
-
     }
 }

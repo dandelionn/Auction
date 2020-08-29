@@ -3,6 +3,7 @@
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
 namespace TestDomainModel
 {
     using System.Collections.Generic;
@@ -17,12 +18,24 @@ namespace TestDomainModel
     [TestClass]
     public class ProductTests
     {
+        /// <summary>
+        /// Defines the product.
+        /// </summary>
         private Product product;
 
+        /// <summary>
+        /// Defines the context.
+        /// </summary>
         private ValidationContext context;
 
+        /// <summary>
+        /// Defines the results.
+        /// </summary>
         private List<ValidationResult> results;
 
+        /// <summary>
+        /// The TestInit.
+        /// </summary>
         [TestInitialize]
         public void TestInit()
         {
@@ -31,6 +44,9 @@ namespace TestDomainModel
             results = new List<ValidationResult>();
         }
 
+        /// <summary>
+        /// The Name_Null.
+        /// </summary>
         [TestMethod]
         public void Name_Null()
         {
@@ -44,6 +60,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.NameRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Name_TooLong.
+        /// </summary>
         [TestMethod]
         public void Name_TooLong()
         {
@@ -57,6 +76,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthBetween2And50, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Name_TooShort.
+        /// </summary>
         [TestMethod]
         public void Name_TooShort()
         {
@@ -70,6 +92,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthBetween2And50, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Name_Valid.
+        /// </summary>
         [TestMethod]
         public void Name_Valid()
         {
@@ -81,6 +106,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The Categories_Null.
+        /// </summary>
         [TestMethod]
         public void Categories_Null()
         {
@@ -94,6 +122,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.CategoriesRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Categories_ListEmpty.
+        /// </summary>
         [TestMethod]
         public void Categories_ListEmpty()
         {
@@ -107,6 +138,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthMustBeGreaterThanZero, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Categories_Valid.
+        /// </summary>
         [TestMethod]
         public void Categories_Valid()
         {
@@ -118,6 +152,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The Sellers_Null.
+        /// </summary>
         [TestMethod]
         public void Sellers_Null()
         {
@@ -131,6 +168,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.SellersRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Sellers_ListEmpty.
+        /// </summary>
         [TestMethod]
         public void Sellers_ListEmpty()
         {
@@ -144,6 +184,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthMustBeGreaterThanZero, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Sellers_Valid.
+        /// </summary>
         [TestMethod]
         public void Sellers_Valid()
         {
@@ -155,6 +198,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The Auctions_NotNull.
+        /// </summary>
         [TestMethod]
         public void Auctions_NotNull()
         {

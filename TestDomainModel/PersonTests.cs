@@ -3,6 +3,7 @@
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
 namespace TestDomainModel
 {
     using System.Collections.Generic;
@@ -11,15 +12,30 @@ namespace TestDomainModel
     using DomainModel.Validators;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    /// <summary>
+    /// Defines the <see cref="PersonTests" />.
+    /// </summary>
     [TestClass]
     public class PersonTests
     {
+        /// <summary>
+        /// Defines the person.
+        /// </summary>
         private Person person;
 
+        /// <summary>
+        /// Defines the context.
+        /// </summary>
         private ValidationContext context;
 
+        /// <summary>
+        /// Defines the results.
+        /// </summary>
         private List<ValidationResult> results;
 
+        /// <summary>
+        /// The TestInit.
+        /// </summary>
         [TestInitialize]
         public void TestInit()
         {
@@ -28,6 +44,9 @@ namespace TestDomainModel
             results = new List<ValidationResult>();
         }
 
+        /// <summary>
+        /// The Name_Null.
+        /// </summary>
         [TestMethod]
         public void Name_Null()
         {
@@ -41,6 +60,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.NameRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Name_Valid.
+        /// </summary>
         [TestMethod]
         public void Name_Valid()
         {
@@ -51,6 +73,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The Name_TooLong.
+        /// </summary>
         [TestMethod]
         public void Name_TooLong()
         {
@@ -64,6 +89,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthBetween2And50, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Name_TooShort.
+        /// </summary>
         [TestMethod]
         public void Name_TooShort()
         {
@@ -77,6 +105,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthBetween2And50, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Surname_Null.
+        /// </summary>
         [TestMethod]
         public void Surname_Null()
         {
@@ -90,6 +121,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.SurnameRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Surname_Valid.
+        /// </summary>
         [TestMethod]
         public void Surname_Valid()
         {
@@ -101,6 +135,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The Surname_TooLong.
+        /// </summary>
         [TestMethod]
         public void Surname_TooLong()
         {
@@ -114,6 +151,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthBetween2And50, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Surname_TooShort.
+        /// </summary>
         [TestMethod]
         public void Surname_TooShort()
         {
@@ -127,6 +167,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthBetween2And50, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Address_Null.
+        /// </summary>
         [TestMethod]
         public void Address_Null()
         {
@@ -138,6 +181,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The Address_Valid.
+        /// </summary>
         [TestMethod]
         public void Address_Valid()
         {
@@ -149,6 +195,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The Address_TooLong.
+        /// </summary>
         [TestMethod]
         public void Address_TooLong()
         {
@@ -162,6 +211,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthBetween2And100, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Address_TooShort.
+        /// </summary>
         [TestMethod]
         public void Address_TooShort()
         {
@@ -175,6 +227,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthBetween2And100, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The PhoneNumber_Null.
+        /// </summary>
         [TestMethod]
         public void PhoneNumber_Null()
         {
@@ -187,6 +242,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.PhoneNumberRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The PhoneNumber_Valid.
+        /// </summary>
         [TestMethod]
         public void PhoneNumber_Valid()
         {
@@ -198,6 +256,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The PhoneNumber_TooShort.
+        /// </summary>
         [TestMethod]
         public void PhoneNumber_TooShort()
         {
@@ -211,6 +272,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidPhoneNumber, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The PhoneNumber_TooLong.
+        /// </summary>
         [TestMethod]
         public void PhoneNumber_TooLong()
         {
@@ -224,6 +288,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidPhoneNumber, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The PhoneNumber_InvalidCharacter.
+        /// </summary>
         [TestMethod]
         public void PhoneNumber_InvalidCharacter()
         {
@@ -237,12 +304,18 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidPhoneNumber, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Scores_NotNull.
+        /// </summary>
         [TestMethod]
         public void Scores_NotNull()
         {
-            Assert.IsNotNull(person.Scores); ///test for pozitive numbers, between 1 and 10
+            Assert.IsNotNull(person.Scores);
         }
-        
+
+        /// <summary>
+        /// The BanEndDate_NotNull.
+        /// </summary>
         [TestMethod]
         public void BanEndDate_NotNull()
         {

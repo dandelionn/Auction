@@ -3,6 +3,7 @@
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
 namespace TestDomainModel
 {
     using System.Collections.Generic;
@@ -17,12 +18,24 @@ namespace TestDomainModel
     [TestClass]
     public class BidTests
     {
+        /// <summary>
+        /// Defines the bid.
+        /// </summary>
         private Bid bid;
 
+        /// <summary>
+        /// Defines the context.
+        /// </summary>
         private ValidationContext context;
 
+        /// <summary>
+        /// Defines the results.
+        /// </summary>
         private List<ValidationResult> results;
 
+        /// <summary>
+        /// The TestInit.
+        /// </summary>
         [TestInitialize]
         public void TestInit()
         {
@@ -31,6 +44,9 @@ namespace TestDomainModel
             results = new List<ValidationResult>();
         }
 
+        /// <summary>
+        /// The Bidder_Null.
+        /// </summary>
         [TestMethod]
         public void Bidder_Null()
         {
@@ -44,6 +60,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.BidderRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Bidder_NotNull.
+        /// </summary>
         [TestMethod]
         public void Bidder_NotNull()
         {
@@ -55,6 +74,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The Auction_Null.
+        /// </summary>
         [TestMethod]
         public void Auction_Null()
         {
@@ -68,6 +90,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.AuctionRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Auction_NotNull.
+        /// </summary>
         [TestMethod]
         public void Auction_NotNull()
         {
@@ -79,6 +104,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The Value_Null.
+        /// </summary>
         [TestMethod]
         public void Value_Null()
         {
@@ -92,6 +120,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.ValueRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Value_Zero.
+        /// </summary>
         [TestMethod]
         public void Value_Zero()
         {
@@ -105,6 +136,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.ValueShouldNotBeZero, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Value_Negative.
+        /// </summary>
         [TestMethod]
         public void Value_Negative()
         {
@@ -118,6 +152,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.NegativeValue, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Value_Valid.
+        /// </summary>
         [TestMethod]
         public void Value_Valid()
         {

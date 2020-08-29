@@ -3,6 +3,7 @@
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
 namespace TestDomainModel
 {
     using System.Collections.Generic;
@@ -22,10 +23,19 @@ namespace TestDomainModel
         /// </summary>
         private Category category;
 
+        /// <summary>
+        /// Defines the context.
+        /// </summary>
         private ValidationContext context;
 
+        /// <summary>
+        /// Defines the results.
+        /// </summary>
         private List<ValidationResult> results;
 
+        /// <summary>
+        /// The TestInit.
+        /// </summary>
         [TestInitialize]
         public void TestInit()
         {
@@ -34,6 +44,9 @@ namespace TestDomainModel
             results = new List<ValidationResult>();
         }
 
+        /// <summary>
+        /// The Name_Valid.
+        /// </summary>
         [TestMethod]
         public void Name_Valid()
         {
@@ -45,6 +58,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, results.Count);
         }
 
+        /// <summary>
+        /// The Name_TooLong.
+        /// </summary>
         [TestMethod]
         public void Name_TooLong()
         {
@@ -58,6 +74,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthBetween2And50, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Name_TooShort.
+        /// </summary>
         [TestMethod]
         public void Name_TooShort()
         {
@@ -71,6 +90,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LengthBetween2And50, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Name_Null.
+        /// </summary>
         [TestMethod]
         public void Name_Null()
         {
@@ -84,12 +106,18 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.NameRequired, res.ErrorMessage);
         }
 
+        /// <summary>
+        /// The Products_NotNull.
+        /// </summary>
         [TestMethod]
         public void Products_NotNull()
         {
             Assert.IsNotNull(category.Products);
         }
 
+        /// <summary>
+        /// The ParentCategories_NotNull.
+        /// </summary>
         [TestMethod]
         public void ParentCategories_NotNull()
         {
