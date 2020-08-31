@@ -21,7 +21,7 @@ namespace DataLayer.AccessLayer
         /// <summary>
         /// Initializes a new instance of the <see cref="AuctionDBContext"/> class.
         /// </summary>
-        public AuctionDBContext() : base("AuctionDBConnection")
+        public AuctionDBContext() : base("Auction")
         {
         }
 

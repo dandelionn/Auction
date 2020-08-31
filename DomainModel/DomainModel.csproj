@@ -68,7 +68,6 @@
     <Compile Include="UserProfile.cs" />
     <Compile Include="Validators\PriceValidator.cs" />
     <Compile Include="Validators\CurrencyNameValidator.cs" />
-    <Compile Include="Validators\RequiredPhoneNumberOrEmail.cs" />
     <Compile Include="Helpers\ErrorMessages.cs" />
     <Compile Include="Validators\MustHaveOneElementAttribute.cs" />
   </ItemGroup>
