@@ -1,10 +1,10 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="LoggerWrapper.cs" company="Transilvania University of Brasov">    
+// <copyright file="Log4NetWrapper.cs" company="Transilvania University of Brasov">    
 // Author: Paul Michea  All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace DataLayer
+namespace Log
 {
     using System;
     using log4net;

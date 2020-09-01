@@ -65,6 +65,7 @@ namespace TestServiceLayer
             {
                 Id = sellerId,
             };
+            sellerId++;
             return new Seller();
         }
 
@@ -137,7 +138,7 @@ namespace TestServiceLayer
             {
                 Id = bidderId,
             };
-            bidderId = 0;
+            bidderId++;
             return bidder;
         }
 
@@ -152,7 +153,7 @@ namespace TestServiceLayer
                 Id = bidId,
                 Value = 120,
             };
-            bidId = 0;
+            bidId++;
             return bid;
         }
 

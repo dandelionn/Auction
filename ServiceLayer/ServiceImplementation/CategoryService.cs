@@ -12,6 +12,7 @@ namespace ServiceLayer.ServiceImplementation
     using DataLayer;
     using DataMapper;
     using DomainModel;
+    using Log;
 
     /// <summary>
     /// Defines the <see cref="CategoryService" />.

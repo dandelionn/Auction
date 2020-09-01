@@ -35,5 +35,20 @@ namespace DataMapper
         /// Gets the BidRepository.
         /// </summary>
         IBidRepository BidRepository { get; }
+
+        /// <summary>
+        /// Gets the UserProfileRepository.
+        /// </summary>
+        IUserProfileRepository UserProfileRepository { get; }
+
+        /// <summary>
+        /// Gets the BidderRepository.
+        /// </summary>
+        IBidderRepository BidderRepository { get; }
+
+        /// <summary>
+        /// Gets the SellerRepository.
+        /// </summary>
+        ISellerRepository SellerRepository { get; }
     }
 }

@@ -56,13 +56,12 @@ namespace DomainModel
         /// The Equals.
         /// </summary>
         /// <param name="obj">The obj<see cref="object"/>.</param>
-        /// <returns>The <see cref="bool"/>Tests if this class is equal to another.</returns>
+        /// <returns>True if objects are equal, false otherwise.</returns>
         public override bool Equals(object obj)
         {
             var profile = obj as UserProfile;
             return profile != null &&
                    Id == profile.Id &&
-                   EqualityComparer<Person>.Default.Equals(Person, profile.Person) &&
                    Username == profile.Username &&
                    Password == profile.Password &&
                    Email == profile.Email;
@@ -71,12 +70,11 @@ namespace DomainModel
         /// <summary>
         /// The GetHashCode.
         /// </summary>
-        /// <returns>The <see cref="int"/>Computes hash code.</returns>
+        /// <returns>The <see cref="int"/>The hash code.</returns>
         public override int GetHashCode()
         {
-            var hashCode = 1259251944;
+            var hashCode = 1556482632;
             hashCode = (hashCode * -1521134295) + Id.GetHashCode();
-            hashCode = (hashCode * -1521134295) + EqualityComparer<Person>.Default.GetHashCode(Person);
             hashCode = (hashCode * -1521134295) + EqualityComparer<string>.Default.GetHashCode(Username);
             hashCode = (hashCode * -1521134295) + EqualityComparer<string>.Default.GetHashCode(Password);
             hashCode = (hashCode * -1521134295) + EqualityComparer<string>.Default.GetHashCode(Email);

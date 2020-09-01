@@ -137,7 +137,6 @@ namespace TestDatabase
         public void InsertUserProfileShouldNotFail()
         {
             var failed = userProfileServices.Insert(userProfile);
-            var all = userProfileServices.GetAll();
             var dbUserProfile = userProfileServices.GetByID(userProfile.Id);
             Assert.AreEqual(userProfile, dbUserProfile);
         }
@@ -319,12 +318,16 @@ namespace TestDatabase
         /// </summary>
         /// <param name="n">The n<see cref="int"/>.</param>
         /// <returns>The <see cref="List{Auction}"/>.</returns>
-        private static List<Auction> CreateStartedAndNotFinalizedAuctions(int n)
+        private List<Auction> CreateStartedAndNotFinalizedAuctions(int n)
         {
             var auctions = new List<Auction>();
             for (int i = 0; i < n; ++i)
             {
                 var auction = CreateActiveAuction();
+                var product = FakeEntityFactory.CreateProduct();
+                product.Categories.Add(FakeEntityFactory.CreateCategory());
+                product.Sellers.Add(seller);
+                auction.Products.Add(product);
                 auctions.Add(auction);
             }
 
@@ -351,7 +354,7 @@ namespace TestDatabase
         /// The Insert_TooManyAuctionsStartedAndNotFinalized.
         /// </summary>
         [TestMethod]
-        public void Insert_TooManyAuctionsStartedAndNotFinalized()
+        public void Insert_TooManyAuctionsStartedAndNotFinalized_ShouldFail()
         {
             SetUpAuction();
 
@@ -368,23 +371,20 @@ namespace TestDatabase
         /// The CreateFutureAuction.
         /// </summary>
         /// <returns>The <see cref="Auction"/>.</returns>
-        private static Auction CreateFutureAuction()
+        private Auction CreateFutureAuction()
         {
             var userProfile = FakeEntityFactory.CreateUserProfile();
             var person = FakeEntityFactory.CreatePerson();
             person.Id = userProfile.Id;
             person.UserProfile = userProfile;
-            var seller = FakeEntityFactory.CreateSeller();
-            person.Seller = seller;
-            seller.Id = person.Id;
-            seller.Person = person;
+
             var product = FakeEntityFactory.CreateProduct();
             var category = FakeEntityFactory.CreateCategory();
-            product.Sellers.Add(seller);
+            product.Sellers.Add(this.seller);
             product.Categories.Add(category);
 
             var auction = FakeEntityFactory.CreateAuction();
-            auction.Seller = seller;
+            auction.Seller = this.seller;
             auction.Products.Add(product);
             auction.BeginDate = DateTime.Now.AddDays(1);
             auction.EndDate = DateTime.Now.AddDays(2);
@@ -397,7 +397,7 @@ namespace TestDatabase
         /// </summary>
         /// <param name="n">The n<see cref="int"/>.</param>
         /// <returns>The <see cref="List{Auction}"/>.</returns>
-        private static List<Auction> CreateNotStartedAndNotFinalizedAuctions(int n)
+        private List<Auction> CreateNotStartedAndNotFinalizedAuctions(int n)
         {
             var auctions = new List<Auction>();
             for (int i = 0; i < n; ++i)
@@ -412,31 +412,26 @@ namespace TestDatabase
         /// The Insert_AuctionsNotStartedAndNotFinalized.
         /// </summary>
         [TestMethod]
-        public void Insert_AuctionsNotStartedAndNotFinalized()
+        public void Insert_AuctionsNotStartedAndNotFinalized_ShouldNotFail()
         {
             SetUpAuction();
 
             var limit = int.Parse(ConfigurationManager.AppSettings.Get("MaxAuctionsStartedAndNotFinalized"));
             auction.Seller.Auctions = CreateNotStartedAndNotFinalizedAuctions(limit + 1);
 
-            try
-            {
-                var results = auctionServices.Insert(auction);
-                Assert.AreEqual(0, results.Count);
-            }
-            catch (DbEntityValidationException e)
-            {
-                Console.WriteLine(e.EntityValidationErrors);
-            }
+
+            var results = auctionServices.Insert(auction);
+            Assert.AreEqual(0, results.Count);
         }
 
         /// <summary>
         /// The CreateActiveAuction.
         /// </summary>
         /// <returns>The <see cref="Auction"/>.</returns>
-        private static Auction CreateActiveAuction()
+        private Auction CreateActiveAuction()
         {
             var auction = FakeEntityFactory.CreateAuction();
+            auction.Seller = seller;
             auction.BeginDate = System.DateTime.Now;
             auction.EndDate = System.DateTime.Now.AddDays(1);
             auction.Active = true;
@@ -448,7 +443,7 @@ namespace TestDatabase
         /// </summary>
         /// <param name="commonCategories">The commonCategories<see cref="List{Category}"/>.</param>
         /// <returns>The <see cref="IList{Auction}"/>.</returns>
-        private static IList<Auction> CreateActiveAuctionsWithOneCategoryInExcess(List<Category> commonCategories)
+        private IList<Auction> CreateActiveAuctionsWithOneCategoryInExcess(List<Category> commonCategories)
         {
             var limit = int.Parse(ConfigurationManager.AppSettings.Get("MaxAuctionsStartedAndNotFinalizedForCategory"));
             var activeAuctions = new List<Auction>();
@@ -456,6 +451,7 @@ namespace TestDatabase
             {
                 var activeAuction = CreateActiveAuction();
                 var product = FakeEntityFactory.CreateProduct(commonCategories);
+                product.Sellers.Add(this.seller);
                 activeAuction.Products.Add(product);
                 activeAuctions.Add(activeAuction);
             }
@@ -466,13 +462,12 @@ namespace TestDatabase
         /// The Insert_AuctionWithSingleCategory_CategoryInExcess.
         /// </summary>
         [TestMethod]
-        public void Insert_AuctionWithSingleCategory_CategoryInExcess()
+        public void Insert_AuctionWithSingleCategory_CategoryInExcess_ShouldFail()
         {
-            var auction = FakeEntityFactory.CreateAuction();
-            auction.Seller = FakeEntityFactory.CreateSeller();
-            auction.Seller.Person = FakeEntityFactory.CreatePerson();
+            SetUpAuction();
             var commonCategories = new List<Category> { FakeEntityFactory.CreateCategory() };
-            auction.Products.Add(FakeEntityFactory.CreateProduct(commonCategories));
+            product.Categories = commonCategories;
+            auction.Products.Add(product);
             auction.Seller.Auctions = CreateActiveAuctionsWithOneCategoryInExcess(commonCategories).ToList();
 
             var results = auctionServices.Insert(auction);
@@ -486,7 +481,7 @@ namespace TestDatabase
         /// The CreateActiveAuctionsWithNoCategoryInExcess.
         /// </summary>
         /// <returns>The <see cref="IList{Auction}"/>.</returns>
-        private static IList<Auction> CreateActiveAuctionsWithNoCategoryInExcess()
+        private IList<Auction> CreateActiveAuctionsWithNoCategoryInExcess()
         {
             var limit = int.Parse(ConfigurationManager.AppSettings.Get("MaxAuctionsStartedAndNotFinalizedForCategory"));
             var activeAuctions = new List<Auction>();
@@ -494,6 +489,7 @@ namespace TestDatabase
             {
                 var categories = new List<Category> { FakeEntityFactory.CreateCategory() };
                 var product = FakeEntityFactory.CreateProduct(categories);
+                product.Sellers.Add(this.seller);
                 var activeAuction = CreateActiveAuction();
                 activeAuction.Products.Add(product);
                 activeAuctions.Add(activeAuction);
@@ -505,13 +501,12 @@ namespace TestDatabase
         /// The Insert_SingleCategory_NoCategoryInExcess.
         /// </summary>
         [TestMethod]
-        public void Insert_SingleCategory_NoCategoryInExcess()
+        public void Insert_SingleCategoryNoCategoryInExcess_ShouldNotFail()
         {
-            var limit = int.Parse(ConfigurationManager.AppSettings.Get("MaxAuctionsStartedAndNotFinalizedForCategory"));
-            var auction = FakeEntityFactory.CreateAuction();
-            auction.Seller = FakeEntityFactory.CreateSeller();
-            auction.Seller.Person = FakeEntityFactory.CreatePerson();
-            auction.Products.Add(FakeEntityFactory.CreateProduct());
+            SetUpAuction();
+            product.Categories.Add(category);
+            product.Sellers.Add(seller);
+            auction.Products.Add(product);
             auction.Seller.Auctions = CreateActiveAuctionsWithNoCategoryInExcess().ToList();
 
             var results = auctionServices.Insert(auction);
@@ -524,7 +519,7 @@ namespace TestDatabase
         /// </summary>
         /// <param name="commonCategories">The commonCategories<see cref="List{Category}"/>.</param>
         /// <returns>The <see cref="IList{Auction}"/>.</returns>
-        private static IList<Auction> CreateActiveAuctionsWithCategoriesInExcess(List<Category> commonCategories)
+        private IList<Auction> CreateActiveAuctionsWithCategoriesInExcess(List<Category> commonCategories)
         {
             var limit = int.Parse(ConfigurationManager.AppSettings.Get("MaxAuctionsStartedAndNotFinalizedForCategory"));
             var activeAuctions = new List<Auction>();
@@ -532,6 +527,7 @@ namespace TestDatabase
             {
                 var withAddedCategories = commonCategories.Concat(new List<Category> { FakeEntityFactory.CreateCategory(), FakeEntityFactory.CreateCategory() });
                 var product = FakeEntityFactory.CreateProduct(withAddedCategories.ToList());
+                product.Sellers.Add(this.seller);
                 var activeAuction = CreateActiveAuction();
                 activeAuction.Products.Add(product);
                 activeAuctions.Add(activeAuction);
@@ -543,14 +539,14 @@ namespace TestDatabase
         /// The Insert_AuctionWithMultipleCategories_OneCategoryInExcess.
         /// </summary>
         [TestMethod]
-        public void Insert_AuctionWithMultipleCategories_OneCategoryInExcess()
+        public void Insert_AuctionsWithMultipleCategories_OneCategoryInExcess_ShouldFail()
         {
-            var auction = FakeEntityFactory.CreateAuction();
-            auction.Seller = FakeEntityFactory.CreateSeller();
-            auction.Seller.Person = FakeEntityFactory.CreatePerson();
-            var commonCategories = new List<Category> { FakeEntityFactory.CreateCategory() };
-            auction.Products.Add(FakeEntityFactory.CreateProduct(commonCategories));
-            auction.Products.Add(FakeEntityFactory.CreateProduct(new List<Category>()));
+            SetUpAuction();
+ 
+            var commonCategories = new List<Category> { FakeEntityFactory.CreateCategory()};
+            var product = FakeEntityFactory.CreateProduct(commonCategories);
+            product.Sellers.Add(this.seller);
+            auction.Products = new List<Product> { product };
             auction.Seller.Auctions = CreateActiveAuctionsWithCategoriesInExcess(commonCategories).ToList();
 
             var results = auctionServices.Insert(auction);
@@ -564,7 +560,7 @@ namespace TestDatabase
         /// The Insert_AuctionWithMultipleCategories_BothCategoriesInExcess.
         /// </summary>
         [TestMethod]
-        public void Insert_AuctionWithMultipleCategories_BothCategoriesInExcess()
+        public void Insert_AuctionWithMultipleCategories_BothCategoriesInExcess_ShouldFail()
         {
             var auction = FakeEntityFactory.CreateAuction();
             auction.Seller = FakeEntityFactory.CreateSeller();
@@ -584,14 +580,15 @@ namespace TestDatabase
         /// The CreateActiveAuctionsWithMultipleCategoriesNoCategoriesInExcess.
         /// </summary>
         /// <returns>The <see cref="IList{Auction}"/>.</returns>
-        private static IList<Auction> CreateActiveAuctionsWithMultipleCategoriesNoCategoriesInExcess()
+        private IList<Auction> CreateActiveAuctionsWithMultipleCategoriesNoCategoriesInExcess()
         {
-            var limit = int.Parse(ConfigurationManager.AppSettings.Get("MaxAuctionsStartedAndNotFinalizedForCategory"));
+            var limit = int.Parse(ConfigurationManager.AppSettings.Get("MaxAuctionsStartedAndNotFinalized"));
             var activeAuctions = new List<Auction>();
             for (int i = 0; i < limit; ++i)
             {
                 var categories = new List<Category> { FakeEntityFactory.CreateCategory(), FakeEntityFactory.CreateCategory() };
                 var product = FakeEntityFactory.CreateProduct(categories);
+                product.Sellers.Add(this.seller);
                 var activeAuction = CreateActiveAuction();
                 activeAuction.Products.Add(product);
                 activeAuctions.Add(activeAuction);
@@ -603,31 +600,25 @@ namespace TestDatabase
         /// The Insert_AuctionWithMultipleCategories_NoCategoryInExcess.
         /// </summary>
         [TestMethod]
-        public void Insert_AuctionWithMultipleCategories_NoCategoryInExcess()
+        public void Insert_AuctionsWithMultipleCategories_NoCategoryInExcess_ShouldNotFail()
         {
-            var auction = FakeEntityFactory.CreateAuction();
-            auction.Seller = FakeEntityFactory.CreateSeller();
-            auction.Seller.Person = FakeEntityFactory.CreatePerson();
+            SetUpAuction();
+
             var categories = new List<Category> { FakeEntityFactory.CreateCategory(), FakeEntityFactory.CreateCategory() };
-            auction.Products.Add(FakeEntityFactory.CreateProduct(categories));
+            var product = FakeEntityFactory.CreateProduct(categories);
+            product.Sellers.Add(seller);
+            auction.Products.Add(product);
             auction.Seller.Auctions = CreateActiveAuctionsWithMultipleCategoriesNoCategoriesInExcess().ToList();
 
-            try
-            {
-                var results = auctionServices.Insert(auction);
-                Assert.AreEqual(0, results.Count);
-            }
-            catch (DbEntityValidationException e)
-            {
-                Console.WriteLine(e.EntityValidationErrors);
-            }
+            var results = auctionServices.Insert(auction);
+            Assert.AreEqual(0, results.Count);
         }
 
         /// <summary>
         /// The Insert_SellerBanned.
         /// </summary>
         [TestMethod]
-        public void Insert_SellerBanned()
+        public void Insert_SellerBanned_ShouldFail()
         {
             var auction = FakeEntityFactory.CreateAuction();
             auction.Seller = FakeEntityFactory.CreateSeller();
@@ -646,12 +637,9 @@ namespace TestDatabase
         /// The Insert_ValidAuction.
         /// </summary>
         [TestMethod]
-        public void Insert_ValidAuction()
+        public void Insert_ValidAuction_ShouldNotFail()
         {
-            var auction = FakeEntityFactory.CreateAuction();
-            auction.Seller = FakeEntityFactory.CreateSeller();
-            auction.Seller.Person = FakeEntityFactory.CreatePerson();
-            auction.Products.Add(FakeEntityFactory.CreateProduct());
+            SetUpAuction();
 
             auctionServices.Insert(auction).Should().BeEmpty();
         }
@@ -660,22 +648,23 @@ namespace TestDatabase
         /// The Update_Null.
         /// </summary>
         [TestMethod]
-        public void Update_Null()
+        public void Update_Null_ShouldFail()
         {
             Action act = () => auctionServices.Update(null);
             act.Should().Throw<NullReferenceException>();
         }
 
         /// <summary>
-        /// The Update_ChangesInFutureAuctions.
+        /// The Update_ChangesInActiveAuctions.
         /// </summary>
         [TestMethod]
-        public void Update_ChangesInFutureAuctions()
+        public void Update_ChangesInActiveAuctions_ShouldNotFail()
         {
             SetUpAuction();
-            var insertResulsts = auctionServices.Insert(auction);
-            auction.BeginDate = DateTime.Now.AddDays(1);
-            auction.EndDate = DateTime.Now.AddDays(2);
+            auctionServices.Insert(this.auction);
+
+            auction.Address = "another address";
+
             try
             {
                 var results = auctionServices.Update(auction);
@@ -688,45 +677,10 @@ namespace TestDatabase
         }
 
         /// <summary>
-        /// The Update_ChangesInExpiredAuctions.
-        /// </summary>
-        [TestMethod]
-        public void Update_ChangesInExpiredAuctions()
-        {
-            var auction = FakeEntityFactory.CreateAuction();
-            auction.Seller = FakeEntityFactory.CreateSeller();
-            auction.Seller.Person = FakeEntityFactory.CreatePerson();
-            auction.Products.Add(FakeEntityFactory.CreateProduct());
-            auction.BeginDate = DateTime.Now.AddDays(-1);
-            auction.EndDate = DateTime.Now;
-
-            var results = auctionServices.Update(auction);
-
-            Assert.AreEqual(1, results.Count);
-            var res = results[0];
-            Assert.AreEqual(ErrorMessages.ChangesNotAllowedInExpiredAuctions, res.ErrorMessage);
-        }
-
-        /// <summary>
-        /// The Update_ChangesInActiveAuctions.
-        /// </summary>
-        [TestMethod]
-        public void Update_ChangesInActiveAuctions()
-        {
-            var auction = FakeEntityFactory.CreateAuction();
-            auction.Seller = FakeEntityFactory.CreateSeller();
-            auction.Products.Add(FakeEntityFactory.CreateProduct());
-
-            var results = auctionServices.Update(auction);
-
-            Assert.AreEqual(0, results.Count);
-        }
-
-        /// <summary>
         /// The Insert_BeginDateAfterEndDate.
         /// </summary>
         [TestMethod]
-        public void Insert_BeginDateAfterEndDate()
+        public void Insert_BeginDateAfterEndDate_ShouldFail()
         {
             var auction = FakeEntityFactory.CreateAuction();
             auction.Seller = FakeEntityFactory.CreateSeller();
@@ -741,107 +695,6 @@ namespace TestDatabase
             Assert.AreEqual(1, results.Count);
             var res = results[0];
             Assert.AreEqual(ErrorMessages.BeginDateIsAfterEndDate, res.ErrorMessage);
-        }
-
-        /// <summary>
-        /// The Insert_BeginDateInThePast.
-        /// </summary>
-        [TestMethod]
-        public void Insert_BeginDateInThePast()
-        {
-            var auction = FakeEntityFactory.CreateAuction();
-            auction.Seller = FakeEntityFactory.CreateSeller();
-            auction.Seller.Person = FakeEntityFactory.CreatePerson();
-            auction.Products.Add(FakeEntityFactory.CreateProduct());
-
-            auction.BeginDate = DateTime.Now.AddDays(-1);
-            auction.EndDate = DateTime.Now;
-
-            var results = auctionServices.Insert(auction);
-
-            Assert.AreEqual(1, results.Count);
-            var res = results[0];
-            Assert.AreEqual(ErrorMessages.BeginDateShouldNotBeInThePast, res.ErrorMessage);
-        }
-
-        /// <summary>
-        /// The Insert_ValidAuctionPeriod.
-        /// </summary>
-        [TestMethod]
-        public void Insert_ValidAuctionPeriod()
-        {
-            var auction = FakeEntityFactory.CreateAuction();
-            auction.Seller = FakeEntityFactory.CreateSeller();
-            auction.Seller.Person = FakeEntityFactory.CreatePerson();
-            auction.Products.Add(FakeEntityFactory.CreateProduct());
-
-            auction.BeginDate = DateTime.Now;
-            auction.EndDate = DateTime.Now.AddDays(1);
-
-            var results = auctionServices.Insert(auction);
-
-            Assert.AreEqual(0, results.Count);
-        }
-
-        /// <summary>
-        /// The Insert_AuctionPeriodTooLarge.
-        /// </summary>
-        [TestMethod]
-        public void Insert_AuctionPeriodTooLarge()
-        {
-            var auction = FakeEntityFactory.CreateAuction();
-            auction.Seller = FakeEntityFactory.CreateSeller();
-            auction.Seller.Person = FakeEntityFactory.CreatePerson();
-            auction.Products.Add(FakeEntityFactory.CreateProduct());
-            var auctionMaxPeriodInMonths = int.Parse(ConfigurationManager.AppSettings.Get("AuctionMaxPeriodInMonths"));
-            auction.BeginDate = DateTime.Now;
-            auction.EndDate = DateTime.Now.AddMonths(auctionMaxPeriodInMonths + 1);
-
-            var results = auctionServices.Insert(auction);
-
-            Assert.AreEqual(1, results.Count);
-            var res = results[0];
-            Assert.AreEqual(ErrorMessages.AuctionPeriodIsTooLarge, res.ErrorMessage);
-        }
-
-        /// <summary>
-        /// The Insert_LastValidEndDate.
-        /// </summary>
-        [TestMethod]
-        public void Insert_LastValidEndDate()
-        {
-            var auction = FakeEntityFactory.CreateAuction();
-            auction.Seller = FakeEntityFactory.CreateSeller();
-            auction.Seller.Person = FakeEntityFactory.CreatePerson();
-            auction.Products.Add(FakeEntityFactory.CreateProduct());
-            var auctionMaxPeriodInMonths = int.Parse(ConfigurationManager.AppSettings.Get("AuctionMaxPeriodInMonths"));
-            auction.BeginDate = DateTime.Now;
-            auction.EndDate = DateTime.Now.AddMonths(auctionMaxPeriodInMonths).AddDays(-1);
-
-            var results = auctionServices.Insert(auction);
-
-            Assert.AreEqual(0, results.Count);
-        }
-
-        /// <summary>
-        /// The Insert_FirstInvalidEndDate.
-        /// </summary>
-        [TestMethod]
-        public void Insert_FirstInvalidEndDate()
-        {
-            var auction = FakeEntityFactory.CreateAuction();
-            auction.Seller = FakeEntityFactory.CreateSeller();
-            auction.Seller.Person = FakeEntityFactory.CreatePerson();
-            auction.Products.Add(FakeEntityFactory.CreateProduct());
-            var auctionMaxPeriodInMonths = int.Parse(ConfigurationManager.AppSettings.Get("AuctionMaxPeriodInMonths"));
-            auction.BeginDate = DateTime.Now;
-            auction.EndDate = DateTime.Now.AddMonths(auctionMaxPeriodInMonths);
-
-            var results = auctionServices.Insert(auction);
-
-            Assert.AreEqual(1, results.Count);
-            var res = results[0];
-            Assert.AreEqual(ErrorMessages.AuctionPeriodIsTooLarge, res.ErrorMessage);
         }
     }
 }

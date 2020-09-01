@@ -139,6 +139,42 @@ namespace TestServiceLayer
         }
 
         /// <summary>
+        /// The Insert_ValidBidder.
+        /// </summary>
+        [TestMethod]
+        public void Insert_ValidBidder()
+        {
+            this.mockRepository.Setup(x => x.Update(It.IsAny<Bidder>()));
+
+            var services = new BidderService(this.mockRepository.Object);
+
+            var bidder = FakeEntityFactory.CreateBidder();
+            bidder.Person = FakeEntityFactory.CreatePerson();
+
+            var results = services.Insert(bidder);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        /// <summary>
+        /// The Update_ValidBidder.
+        /// </summary>
+        [TestMethod]
+        public void Update_ValidBidder()
+        {
+            this.mockRepository.Setup(x => x.Update(It.IsAny<Bidder>()));
+
+            var services = new BidderService(this.mockRepository.Object);
+
+            var bidder = FakeEntityFactory.CreateBidder();
+            bidder.Person = FakeEntityFactory.CreatePerson();
+
+            var results = services.Update(bidder);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        /// <summary>
         /// The getBidders.
         /// </summary>
         /// <returns>The <see cref="IList{Bidder}"/>.</returns>

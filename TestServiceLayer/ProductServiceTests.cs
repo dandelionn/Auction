@@ -125,6 +125,44 @@ namespace TestServiceLayer
         }
 
         /// <summary>
+        /// The Insert_ValidProduct.
+        /// </summary>
+        [TestMethod]
+        public void Insert_ValidProduct()
+        {
+            this.mockRepository.Setup(x => x.Update(It.IsAny<Product>()));
+
+            var services = new ProductService(this.mockRepository.Object);
+
+            var product = FakeEntityFactory.CreateProduct();
+            product.Categories.Add(FakeEntityFactory.CreateCategory());
+            product.Sellers.Add(FakeEntityFactory.CreateSeller());
+
+            var results = services.Insert(product);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        /// <summary>
+        /// The Update_ValidProduct.
+        /// </summary>
+        [TestMethod]
+        public void Update_ValidProduct()
+        {
+            this.mockRepository.Setup(x => x.Update(It.IsAny<Product>()));
+
+            var services = new ProductService(this.mockRepository.Object);
+
+            var product = FakeEntityFactory.CreateProduct();
+            product.Categories.Add(FakeEntityFactory.CreateCategory());
+            product.Sellers.Add(FakeEntityFactory.CreateSeller());
+
+            var results = services.Update(product);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        /// <summary>
         /// The GetProducts.
         /// </summary>
         /// <returns>The <see cref="IList{Product}"/>.</returns>

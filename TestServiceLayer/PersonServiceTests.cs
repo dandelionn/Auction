@@ -125,6 +125,60 @@ namespace TestServiceLayer
         }
 
         /// <summary>
+        /// The Insert_ValidPerson.
+        /// </summary>
+        [TestMethod]
+        public void Insert_ValidPerson()
+        {
+            this.mockRepository.Setup(x => x.Update(It.IsAny<Person>()));
+
+            var services = new PersonService(this.mockRepository.Object);
+
+            var person = FakeEntityFactory.CreatePerson();
+            person.UserProfile = FakeEntityFactory.CreateUserProfile();
+
+            var results = services.Insert(person);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        /// <summary>
+        /// The Update_NoScores.
+        /// </summary>
+        [TestMethod]
+        public void Update_NoScores()
+        {
+            this.mockRepository.Setup(x => x.Update(It.IsAny<Person>()));
+
+            var services = new PersonService(this.mockRepository.Object);
+
+            var person = FakeEntityFactory.CreatePerson();
+            person.UserProfile = FakeEntityFactory.CreateUserProfile();
+
+            var results = services.Update(person);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        /// <summary>
+        /// The Update_WithScores.
+        /// </summary>
+        [TestMethod]
+        public void Update_WithScores()
+        {
+            this.mockRepository.Setup(x => x.Update(It.IsAny<Person>()));
+
+            var services = new PersonService(this.mockRepository.Object);
+
+            var person = FakeEntityFactory.CreatePerson();
+            person.UserProfile = FakeEntityFactory.CreateUserProfile();
+            person.Scores = new List<int> { 7, 2, 5, 2, 5, 8 };
+            var results = services.Update(person);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        /// <summary>
         /// The getPersons.
         /// </summary>
         /// <returns>The <see cref="IList{Person}"/>.</returns>

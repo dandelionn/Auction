@@ -125,6 +125,40 @@ namespace TestServiceLayer
         }
 
         /// <summary>
+        /// The Insert_ValidCategory.
+        /// </summary>
+        [TestMethod]
+        public void Insert_ValidCategory()
+        {
+            this.mockRepository.Setup(x => x.Update(It.IsAny<Category>()));
+
+            var services = new CategoryService(this.mockRepository.Object);
+
+            var category = FakeEntityFactory.CreateCategory();
+
+            var results = services.Insert(category);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        /// <summary>
+        /// The Update_ValidCategory.
+        /// </summary>
+        [TestMethod]
+        public void Update_ValidCategory()
+        {
+            this.mockRepository.Setup(x => x.Update(It.IsAny<Category>()));
+
+            var services = new CategoryService(this.mockRepository.Object);
+
+            var category = FakeEntityFactory.CreateCategory();
+
+            var results = services.Update(category);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        /// <summary>
         /// The getCategories.
         /// </summary>
         /// <returns>The <see cref="IList{Category}"/>.</returns>

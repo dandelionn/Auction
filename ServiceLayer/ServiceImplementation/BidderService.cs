@@ -9,9 +9,9 @@ namespace ServiceLayer.ServiceImplementation
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using DataLayer;
     using DataMapper;
     using DomainModel;
+    using Log;
 
     /// <summary>
     /// Defines the <see cref="BidderService" />.

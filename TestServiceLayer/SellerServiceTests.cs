@@ -125,6 +125,42 @@ namespace TestServiceLayer
         }
 
         /// <summary>
+        /// The Insert_ValidSeller.
+        /// </summary>
+        [TestMethod]
+        public void Insert_ValidSeller()
+        {
+            this.mockRepository.Setup(x => x.Update(It.IsAny<Seller>()));
+
+            var services = new SellerService(this.mockRepository.Object);
+
+            var seller = FakeEntityFactory.CreateSeller();
+            seller.Person = FakeEntityFactory.CreatePerson();
+
+            var results = services.Insert(seller);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        /// <summary>
+        /// The Update_ValidSeller.
+        /// </summary>
+        [TestMethod]
+        public void Update_ValidSeller()
+        {
+            this.mockRepository.Setup(x => x.Update(It.IsAny<Seller>()));
+
+            var services = new SellerService(this.mockRepository.Object);
+
+            var seller = FakeEntityFactory.CreateSeller();
+            seller.Person = FakeEntityFactory.CreatePerson();
+
+            var results = services.Update(seller);
+
+            Assert.AreEqual(0, results.Count);
+        }
+
+        /// <summary>
         /// The GetSellers.
         /// </summary>
         /// <returns>The <see cref="IList{Seller}"/>.</returns>

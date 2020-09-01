@@ -26,7 +26,7 @@ namespace TestServiceLayer
     public class AuctionServiceTests
     {
         /// <summary>
-        /// Defines the this.mockRepository.
+        /// Defines the mockRepository.
         /// </summary>
         private Mock<IAuctionRepository> mockRepository;
 

@@ -11,10 +11,10 @@ namespace ServiceLayer.ServiceImplementation
     using System.ComponentModel.DataAnnotations;
     using System.Configuration;
     using System.Linq;
-    using DataLayer;
     using DataMapper;
     using DomainModel;
     using DomainModel.Validators;
+    using Log;
 
     /// <summary>
     /// Defines the <see cref="AuctionService" />.
@@ -220,10 +220,10 @@ namespace ServiceLayer.ServiceImplementation
         {
             var tooManyAuctions = false;
             var categories = GetAuctionProductsCategories(auction.Products);
+            var maxAuctionsStartedAndNotFinalizedForCategory = int.Parse(ConfigurationManager.AppSettings.Get("MaxAuctionsStartedAndNotFinalizedForCategory"));
             foreach (var category in categories)
             {
                 var auctionsStartedAndNotFinalizedForCategory = GetAuctionsStartedAndNotFinalizedForCategory(auction.Seller.Auctions, category);
-                var maxAuctionsStartedAndNotFinalizedForCategory = int.Parse(ConfigurationManager.AppSettings.Get("MaxAuctionsStartedAndNotFinalizedForCategory"));
                 if (auctionsStartedAndNotFinalizedForCategory > maxAuctionsStartedAndNotFinalizedForCategory)
                 {
                     tooManyAuctions = true;

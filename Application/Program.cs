@@ -16,6 +16,8 @@ namespace Application
         /// </summary>
         internal static void Main()
         {
+            var log4Net = new Log.Log4NetWrapper(typeof(Program));
+            log4Net.Info("This is just a test log message!");
         }
     }
 }

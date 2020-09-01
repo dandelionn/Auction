@@ -65,5 +65,38 @@ namespace DataMapper.SqlServerDAO
                 return new BidRepository();
             }
         }
+
+        /// <summary>
+        /// Gets the UserProfileRepository.
+        /// </summary>
+        public IUserProfileRepository UserProfileRepository
+        {
+            get
+            {
+                return new UserProfileRepository();
+            }
+        }
+
+        /// <summary>
+        /// Gets the BidderRepository.
+        /// </summary>
+        public IBidderRepository BidderRepository
+        {
+            get
+            {
+                return new BidderRepository();
+            }
+        }
+
+        /// <summary>
+        /// Gets the SellerRepository.
+        /// </summary>
+        public ISellerRepository SellerRepository
+        {
+            get
+            {
+                return new SellerRepository();
+            }
+        }
     }
 }

@@ -10,9 +10,9 @@ namespace ServiceLayer.ServiceImplementation
     using System.ComponentModel.DataAnnotations;
     using System.Configuration;
     using System.Linq;
-    using DataLayer;
     using DataMapper;
     using DomainModel;
+    using Log;
 
     /// <summary>
     /// Defines the <see cref="PersonService" />.

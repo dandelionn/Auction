@@ -40,6 +40,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDatabase", "TestDatabase\TestDatabase.csproj", "{1C71228C-C408-4C1C-8D55-62923C54907B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerTests", "LoggerTests\LoggerTests.csproj", "{8E9FBACF-0949-42AA-953F-FF65B845ED70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +80,10 @@ Global
 		{1C71228C-C408-4C1C-8D55-62923C54907B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C71228C-C408-4C1C-8D55-62923C54907B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C71228C-C408-4C1C-8D55-62923C54907B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E9FBACF-0949-42AA-953F-FF65B845ED70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E9FBACF-0949-42AA-953F-FF65B845ED70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E9FBACF-0949-42AA-953F-FF65B845ED70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E9FBACF-0949-42AA-953F-FF65B845ED70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +103,7 @@ Global
 		{77AED068-6692-4E11-83C4-9C0E71E26831} = {11317120-1A4F-483D-812B-C4D58391BE1F}
 		{0960DD1F-39B2-4B82-A4DC-166DEAAFB79D} = {77AED068-6692-4E11-83C4-9C0E71E26831}
 		{1C71228C-C408-4C1C-8D55-62923C54907B} = {6CEBB11B-2FAF-4958-B3D7-0504A2BCE5C2}
+		{8E9FBACF-0949-42AA-953F-FF65B845ED70} = {77AED068-6692-4E11-83C4-9C0E71E26831}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D01584F2-39DF-428A-AFF7-76572D749C24}

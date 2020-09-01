@@ -81,9 +81,9 @@
     <Compile Include="IDAOFactory.cs" />
     <Compile Include="ISellerRepository.cs" />
     <Compile Include="IUserProfileRepository.cs" />
-    <Compile Include="Migrations\202008311009531_InitialCreate.cs" />
-    <Compile Include="Migrations\202008311009531_InitialCreate.designer.cs">
-      <DependentUpon>202008311009531_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202008311533041_InitialCreate.cs" />
+    <Compile Include="Migrations\202008311533041_InitialCreate.designer.cs">
+      <DependentUpon>202008311533041_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -112,8 +112,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202008311009531_InitialCreate.resx">
-      <DependentUpon>202008311009531_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202008311533041_InitialCreate.resx">
+      <DependentUpon>202008311533041_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

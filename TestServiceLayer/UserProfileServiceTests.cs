@@ -156,6 +156,25 @@ namespace TestServiceLayer
         }
 
         /// <summary>
+        /// The Update_ValidUserProfile_NoValidationErrors.
+        /// </summary>
+        [TestMethod]
+        public void Update_ValidUserProfile_NoValidationErrors()
+        {
+            var userProfile = new UserProfile
+            {
+                Username = "dandelionn",
+                Password = "Password0&",
+                Email = "dan@email.com"
+            };
+            this.mockRepository.Setup(x => x.Insert(It.IsAny<UserProfile>()));
+
+            var userProfileServices = new UserProfileService(this.mockRepository.Object);
+
+            userProfileServices.Update(userProfile).Should().BeEmpty();
+        }
+
+        /// <summary>
         /// The GetUserProfiles.
         /// </summary>
         /// <returns>The <see cref="IList{UserProfile}"/>.</returns>
